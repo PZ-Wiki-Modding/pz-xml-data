@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <!-- Root element: animNode -->
+  <xs:element name="animNode" type="AnimNodeType">
+    <xs:annotation>
+      <xs:documentation>Root element for animation node configuration. Defines a single animation state with conditions and events.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  
+  <!-- Main animNode type definition -->
+  <xs:complexType name="AnimNodeType">
+    <xs:annotation>
+      <xs:documentation>Defines the structure of an animation node with properties and conditions.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="m_Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Unique name identifier for this animation node. Example: "LoadRifle", "Reload_Shotgun"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_AnimName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Name of the animation file/clip to play. Example: "Bob_Reload_Rifle_Load"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_Looped" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Whether the animation loops continuously. Example: false (plays once)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_BlendTime" type="xs:decimal">
+        <xs:annotation>
+          <xs:documentation>Transition time in seconds when blending to this animation. Example: 0.20</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_EarlyTransitionOut" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Allows transitioning out of this animation before it completes. Example: true</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_SpeedScale" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Variable that controls animation playback speed. Example: "ReloadSpeed"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_SyncTrackingEnabled" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Whether to sync tracking with other animations. Example: false</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_Conditions" type="ConditionType" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Conditions that must be met for this animation to play. Can have multiple conditions.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_Events" type="EventType" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Events that trigger during animation playback. Can have multiple events.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- Condition type -->
+  <xs:complexType name="ConditionType">
+    <xs:annotation>
+      <xs:documentation>Defines a condition that determines when an animation can play. Example: PerformingAction = "Reload"</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="m_Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Name of the condition variable. Example: "PerformingAction", "WeaponReloadType", "isLoading"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_Type" type="ConditionTypeEnum">
+        <xs:annotation>
+          <xs:documentation>Data type of the condition value.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_Value" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Expected value for this condition. Example: "Reload", "boltaction", "true"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="x_name" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Unique identifier for this condition (UUID). Example: "0df0eb0e-5f38-4d54-a28a-d5053ad520e0"</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  
+  <!-- Event type -->
+  <xs:complexType name="EventType">
+    <xs:annotation>
+      <xs:documentation>Defines an event that fires at a specific time during animation playback. Example: Sound effects, state changes</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="m_EventName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Name of the event to trigger. Example: "loadFinished", "playReloadSound"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:choice>
+        <xs:element name="m_Time" type="TimeValueType">
+          <xs:annotation>
+            <xs:documentation>Trigger event at a specific animation time: Start or End. Example: "End"</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="m_TimePc" type="xs:decimal">
+          <xs:annotation>
+            <xs:documentation>Trigger event at a percentage of animation duration (0.0 to 1.0). Example: 0.3 = 30% through</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+      <xs:element name="m_ParameterValue" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Optional parameter passed to the event. Example: "load", "insertAmmoStart"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="x_name" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Unique identifier for this event (UUID). Example: "9da32e85-e827-4e73-b7e5-869a393ea4c1"</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  
+  <!-- Enumerations -->
+  <xs:simpleType name="ConditionTypeEnum">
+    <xs:annotation>
+      <xs:documentation>Valid data types for condition values.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="STRING">
+        <xs:annotation>
+          <xs:documentation>Text/string value. Example: "Reload", "boltaction"</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BOOL">
+        <xs:annotation>
+          <xs:documentation>Boolean value (true/false). Example: true</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="INT">
+        <xs:annotation>
+          <xs:documentation>Integer value. Example: 42</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FLOAT">
+        <xs:annotation>
+          <xs:documentation>Decimal/float value. Example: 3.14</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="TimeValueType">
+    <xs:annotation>
+      <xs:documentation>Valid timing options for animation events.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Start">
+        <xs:annotation>
+          <xs:documentation>Event triggers at the beginning of animation playback.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="End">
+        <xs:annotation>
+          <xs:documentation>Event triggers at the end of animation playback.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>

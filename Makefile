@@ -18,3 +18,6 @@ settings: generate
 	./.venv/bin/python ./chores/make_settings.py
 
 run: format settings
+
+doc:
+	xsltproc xs3p.xsl schemas/animNode.xsd > schema.html

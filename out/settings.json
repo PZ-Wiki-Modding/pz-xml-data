@@ -1,0 +1,8 @@
+{
+  "xml.fileAssociations": [
+    {
+      "pattern": "**/AnimSets/**/*.xml",
+      "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/schemas/animNode.xsd"
+    }
+  ]
+}

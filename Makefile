@@ -8,5 +8,13 @@ help:
 	@echo "Available targets:"
 	@echo "  format:   Run the formatter"
 
-format:
+generate:
+	./.venv/bin/python ./chores/generate_output.py
+
+format: generate
 	./.venv/bin/python ./chores/format_schemas.py
+
+settings: generate
+	./.venv/bin/python ./chores/make_settings.py
+
+run: format settings

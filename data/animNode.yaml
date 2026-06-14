@@ -1,3 +1,5 @@
+description: |-
+  The AnimNode files are used to link animation files to the game by defining different parameters for the animation. This will notably control the speed of the animation, its blending with animations played before and after, events that need to be triggered and conditions that control when that animation can be played.
 patterns:
 - '**/AnimSets/**/*.xml'
 root:

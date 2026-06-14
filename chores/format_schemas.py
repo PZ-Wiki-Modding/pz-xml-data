@@ -6,7 +6,7 @@ from pathlib import Path
 import re
 
 
-def load_yaml_schema(yaml_path):
+def load_yaml_schema(yaml_path: Path):
     """Load schema definition from YAML file."""
     with open(yaml_path, 'r') as f:
         return yaml.safe_load(f)
@@ -15,9 +15,15 @@ def load_yaml_schema(yaml_path):
 def markdown_to_html(markdown_text):
     """
     Convert markdown to HTML for better VSCode tooltip display.
-    Handles basic markdown syntax.
-    Only escapes HTML tags inside code blocks.
-    Uses markers for HTML tags to avoid XML escaping.
+    
+    The problem comes from Red Hat XML extension which doesn't properly support markdown
+    but this may also be linked to the schemas using XML and the XML syntax being fucked.
+    This issue here: https://github.com/redhat-developer/vscode-xml/issues/951#issuecomment-1818808628
+    is the reason why we need to do all these convertion. What is being done here:
+    - each paragraph is wrapped in <p> tags
+    - each code block lines are wrapped in their own <pre><code> tags
+    - all other basic markdown syntax is converted to HTML tags (bold, italic, headers, lists)
+    - all HTML tags are escaped to avoid XML parsing issues
     """
     html = markdown_text
     
@@ -139,7 +145,7 @@ def add_documentation_with_html(parent, description):
     doc.text = f"__CDATA_START__{html}__CDATA_END__"
 
 
-def create_xsd_from_yaml(yaml_path, output_xsd_path):
+def create_xsd_from_yaml(yaml_path: Path, output_xsd_path: Path):
     """Generate XSD schema file from YAML definition."""
     schema_data = load_yaml_schema(yaml_path)
     
@@ -156,51 +162,160 @@ def create_xsd_from_yaml(yaml_path, output_xsd_path):
     root_annotation = ET.SubElement(root_elem, 'xs:annotation')
     add_documentation_with_html(root_annotation, f"Root element for {root_def.get('name', 'root')} configuration.")
     
-    # Add complex type definitions
-    types = schema_data.get('types', {})
-    for type_name, type_def in types.items():
-        complex_type = ET.SubElement(schema, 'xs:complexType')
-        complex_type.set('name', type_name)
-        
-        # Add elements using xs:all (allows any order)
+    # Collect all union types first
+    union_types = {}
+    union_counter = 0
+    
+    def get_or_create_union_type(type_list):
+        """Create or get a union type for a list of types, returns the type name."""
+        nonlocal union_counter
+        type_key = '|'.join(sorted(str(t) for t in type_list))
+        if type_key not in union_types:
+            union_counter += 1
+            union_type_name = f'union_{union_counter}'
+            union_types[type_key] = (union_type_name, type_list)
+        return union_types[type_key][0]
+    
+    # First pass: scan all elements for union types
+    def scan_for_unions(type_def):
+        if type_def is None:
+            return
         elements = type_def.get('elements', [])
-        if elements:
-            all_elem = ET.SubElement(complex_type, 'xs:all')
-            
-            for elem_def in elements:
-                attrs = elem_def.get('attributes', {})
-                elem = ET.SubElement(all_elem, 'xs:element')
-                elem.set('name', attrs.get('name', 'element'))
-                elem.set('type', attrs.get('type', 'xs:string'))
-                
-                min_occurs = attrs.get('minOccurs')
-                if min_occurs is not None:
-                    elem.set('minOccurs', str(min_occurs))
-                
-                max_occurs = attrs.get('maxOccurs')
-                if max_occurs is not None:
-                    elem.set('maxOccurs', str(max_occurs))
-                
-                # Add documentation
-                if 'description' in elem_def:
-                    annotation = ET.SubElement(elem, 'xs:annotation')
-                    add_documentation_with_html(annotation, elem_def['description'])
+        for elem_def in elements:
+            attrs = elem_def.get('info', {})
+            elem_type = attrs.get('type')
+            if isinstance(elem_type, list):
+                get_or_create_union_type(elem_type)
         
-        # Add attributes
+        # Also scan attributes
         attrs_list = type_def.get('attributes', [])
         for attr_def in attrs_list:
-            attrs = attr_def.get('attributes', {})
-            attr = ET.SubElement(complex_type, 'xs:attribute')
-            attr.set('name', attrs.get('name', 'attribute'))
-            attr.set('type', attrs.get('type', 'xs:string'))
+            attrs = attr_def.get('info', {})
+            attr_type = attrs.get('type')
+            if isinstance(attr_type, list):
+                get_or_create_union_type(attr_type)
+    
+    types = schema_data.get('types', {})
+    for type_def in types.values():
+        scan_for_unions(type_def)
+    
+    # Create union simple types
+    for type_key, (union_type_name, type_list) in union_types.items():
+        simple_type = ET.SubElement(schema, 'xs:simpleType')
+        simple_type.set('name', union_type_name)
+        union_elem = ET.SubElement(simple_type, 'xs:union')
+        union_elem.set('memberTypes', ' '.join(str(t) for t in type_list))
+    
+    # Add type definitions (complex or simple)
+    for type_name, type_def in types.items():
+        # Skip incomplete type definitions
+        if type_def is None:
+            continue
+        
+        type_kind = type_def.get('type', 'complex')
+        
+        if type_kind == 'simple':
+            # Handle simple types (enumerations, restrictions, etc.)
+            simple_type = ET.SubElement(schema, 'xs:simpleType')
+            simple_type.set('name', type_name)
             
-            if attrs.get('use'):
-                attr.set('use', attrs['use'])
+            # Add restriction
+            restriction = type_def.get('restriction', {})
+            if restriction:
+                restriction_elem = ET.SubElement(simple_type, 'xs:restriction')
+                restriction_elem.set('base', restriction.get('base', 'xs:string'))
+                
+                # Add enumeration values
+                enumerations = restriction.get('enumeration', [])
+                for enum_def in enumerations:
+                    enum_info = enum_def.get('info', {})
+                    enum_elem = ET.SubElement(restriction_elem, 'xs:enumeration')
+                    enum_elem.set('value', str(enum_info.get('value', '')))
+                    
+                    # Add documentation
+                    if 'description' in enum_def:
+                        annotation = ET.SubElement(enum_elem, 'xs:annotation')
+                        add_documentation_with_html(annotation, enum_def.get('description', ''))
+        elif type_kind == 'complex':
+            # Handle complex types
+            complex_type = ET.SubElement(schema, 'xs:complexType')
+            complex_type.set('name', type_name)
             
-            # Add documentation
-            if 'description' in attr_def:
-                annotation = ET.SubElement(attr, 'xs:annotation')
-                add_documentation_with_html(annotation, attr_def['description'])
+            # Add elements using xs:all or xs:choice based on configuration
+            elements = type_def.get('elements', [])
+            if elements:
+                # Determine which composition model to use (default: xs:all)
+                composition = type_def.get('composition', 'all')
+                
+                if composition == 'choice':
+                    # For choice composition, all elements can appear in any order and repeat
+                    container_elem = ET.SubElement(complex_type, 'xs:choice')
+                    container_elem.set('minOccurs', '0')
+                    container_elem.set('maxOccurs', 'unbounded')
+                    
+                    for elem_def in elements:
+                        attrs = elem_def.get('info', {})
+                        elem = ET.SubElement(container_elem, 'xs:element')
+                        
+                        # Handle type - check if it's a union (list)
+                        elem_type = attrs.get('type')
+                        if isinstance(elem_type, list):
+                            union_type_name = get_or_create_union_type(elem_type)
+                            attrs['type'] = union_type_name
+                        
+                        for k, v in attrs.items():
+                            elem.set(k, str(v))
+                        
+                        # Add documentation
+                        if 'description' in elem_def:
+                            annotation = ET.SubElement(elem, 'xs:annotation')
+                            add_documentation_with_html(annotation, elem_def.get('description', ''))
+                else:
+                    # Default to xs:all
+                    all_elem = ET.SubElement(complex_type, 'xs:all')
+                    
+                    for elem_def in elements:
+                        attrs = elem_def.get('info', {})
+                        elem = ET.SubElement(all_elem, 'xs:element')
+                        
+                        # Handle type - check if it's a union (list)
+                        elem_type = attrs.get('type')
+                        if isinstance(elem_type, list):
+                            union_type_name = get_or_create_union_type(elem_type)
+                            attrs['type'] = union_type_name
+                        
+                        for k, v in attrs.items():
+                            elem.set(k, str(v))
+                        
+                        # Add documentation
+                        if 'description' in elem_def:
+                            annotation = ET.SubElement(elem, 'xs:annotation')
+                            add_documentation_with_html(annotation, elem_def.get('description', ''))
+            
+            # Add attributes
+            attrs_list = type_def.get('attributes', [])
+            for attr_def in attrs_list:
+                attrs = attr_def.get('info', {})
+                attr = ET.SubElement(complex_type, 'xs:attribute')
+                attr.set('name', attrs.get('name', 'attribute'))
+                
+                # Handle type - check if it's a union (list)
+                attr_type = attrs.get('type')
+                if isinstance(attr_type, list):
+                    union_type_name = get_or_create_union_type(attr_type)
+                    attr.set('type', union_type_name)
+                else:
+                    attr.set('type', attr_type if attr_type else 'xs:string')
+                
+                if attrs.get('use'):
+                    attr.set('use', attrs['use'])
+                
+                # Add documentation
+                if 'description' in attr_def:
+                    annotation = ET.SubElement(attr, 'xs:annotation')
+                    add_documentation_with_html(annotation, attr_def.get('description', ''))
+        else:
+            raise ValueError(f"Unknown type kind '{type_kind}' for type '{type_name}'")
     
     # Pretty print the XML
     xml_str = minidom.parseString(ET.tostring(schema)).toprettyxml(indent='  ')
@@ -240,7 +355,15 @@ if __name__ == '__main__':
     # Define paths
     yaml_file = repo_root / 'data' / 'animNode.yaml'
     xsd_file = repo_root / 'schemas' / 'animNode.xsd'
-    
-    # Generate the schema
-    create_xsd_from_yaml(str(yaml_file), str(xsd_file))
+
+
+    data_path = repo_root / 'data'
+    schemas_path = repo_root / 'schemas'
+
+    for yaml_file in data_path.glob('*.yaml'):
+        # name the schema the same as the yaml file but with .xsd extension
+        xsd_file = schemas_path / (yaml_file.stem + '.xsd')
+
+        # Generate the schema
+        create_xsd_from_yaml(yaml_file, xsd_file)
 

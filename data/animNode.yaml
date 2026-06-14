@@ -1,0 +1,49 @@
+root:
+  name: animNode
+  type: AnimNodeType
+types:
+  AnimNodeType:
+    type: object
+    elements:
+    - attributes:
+        name: m_Name
+        type: xs:string
+        minOccurs: 1
+      description: |-
+        A unique identifier for this animation node. For example: "LoadRiffle", "Walk" etc. This is notably used to reference this animNode in other animNodes.
+    - attributes:
+        name: m_AnimName
+        type: xs:string
+        minOccurs: 1
+      description: |-
+        Name of the animation clip to play. This is the name of the animation file without the extension. The animation clip needs to be stored inside the `anims_X` folder and inside a subfolder which matches the character the animation is for. For the player, that subfolder needs to be `Bob`.
+
+        For example, take the animation file `Bob_Reload_Rifle_Load.glb` with the following folder structure:
+        ```
+        anims_X/
+          Bob/
+            Bob_Reload_Rifle_Load.glb
+        ```
+
+        To reference it in the animNode, you would use:
+        ```xml
+        <m_AnimName>Bob_Reload_Rifle_Load</m_AnimName>
+        ```
+    attributes:
+    - attributes:
+        name: x_extends
+        type: xs:string
+        use: optional
+      description: |-
+        Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure: 
+        ```
+        AnimSets/
+            Rifle/
+                LoadRifle.xml
+                LoadRifle_Alt.xml
+        ``` 
+
+        The LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:
+        ```xml
+        <animNode x_extends="LoadRifle.xml"></animNode>
+        ```

@@ -1,4 +1,4 @@
-pattern:
+patterns:
 - '**/AnimSets/**/*.xml'
 root:
   name: animNode

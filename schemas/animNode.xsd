@@ -1,50 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
-  <!-- Root element: animNode -->
   <xs:element name="animNode" type="AnimNodeType">
     <xs:annotation>
-      <xs:documentation>Root element for animation node configuration. Defines a single animation
-        state with conditions and events.</xs:documentation>
+      <xs:documentation><![CDATA[
+        <p>Root element for animNode configuration.</p>
+        ]]></xs:documentation>
     </xs:annotation>
   </xs:element>
-
-
-  <!-- Main animNode type definition -->
   <xs:complexType name="AnimNodeType">
-
-    <!-- Elements -->
     <xs:all>
       <xs:element name="m_Name" type="xs:string" minOccurs="1">
         <xs:annotation>
-          <xs:documentation>Unique name identifier for this animation node. Example: "LoadRifle", "Reload_Shotgun"</xs:documentation>
+          <xs:documentation><![CDATA[
+        <p>A unique identifier for this animation node. For example: &quot;LoadRiffle&quot;, &quot;Walk&quot; etc. This is notably used to reference this animNode in other animNodes.</p>
+        ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-
       <xs:element name="m_AnimName" type="xs:string" minOccurs="1">
         <xs:annotation>
-          <xs:documentation>Name of the animation file/clip to play. Example: "Bob_Reload_Rifle_Load"</xs:documentation>
+          <xs:documentation><![CDATA[
+        <p>Name of the animation clip to play. This is the name of the animation file without the extension. The animation clip needs to be stored inside the <code>anims_X</code> folder and inside a subfolder which matches the character the animation is for. For the player, that subfolder needs to be <code>Bob</code>.</p><p>For example, take the animation file <code>Bob_Reload_Rifle_Load.glb</code> with the following folder structure:</p><pre><code>anims_X/</code></pre><pre><code>&amp;nbsp;&amp;nbsp;Bob/</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Bob_Reload_Rifle_Load.glb</code></pre><p>To reference it in the animNode, you would use:
+``<code>xml
+&amp;lt;m_AnimName&amp;gt;Bob_Reload_Rifle_Load&amp;lt;/m_AnimName&amp;gt;
+</code>``</p>
+        ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:all>
-
-    <!-- Attributes -->
     <xs:attribute name="x_extends" type="xs:string" use="optional">
       <xs:annotation>
-        <xs:documentation>
-          Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure: 
-          ```
-          AnimSets/
-              Rifle/
-                  LoadRifle.xml
-                  LoadRifle_Alt.xml
-          ``` 
-
-          The LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:
-          ```xml
-          <animNode x_extends="LoadRifle.xml"></animNode>
-          ```
-        </xs:documentation>
+        <xs:documentation><![CDATA[
+        <p>Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure:</p><pre><code>AnimSets/</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Rifle/</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;LoadRifle.xml</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;LoadRifle_Alt.xml</code></pre><p>The LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:
+``<code>xml
+&amp;lt;animNode x_extends=&quot;LoadRifle.xml&quot;&amp;gt;&amp;lt;/animNode&amp;gt;
+</code>``</p>
+        ]]></xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:complexType>

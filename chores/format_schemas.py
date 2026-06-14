@@ -1,4 +1,4 @@
-import yaml
+import yaml, json
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import os
@@ -145,10 +145,8 @@ def add_documentation_with_html(parent, description):
     doc.text = f"__CDATA_START__{html}__CDATA_END__"
 
 
-def create_xsd_from_yaml(yaml_path: Path, output_xsd_path: Path):
+def create_xsd_from_yaml(schema_data: dict, output_xsd_path: Path):
     """Generate XSD schema file from YAML definition."""
-    schema_data = load_yaml_schema(yaml_path)
-    
     # Create root schema element
     schema = ET.Element('xs:schema')
     schema.set('xmlns:xs', 'http://www.w3.org/2001/XMLSchema')
@@ -351,19 +349,13 @@ if __name__ == '__main__':
     # Get the script directory
     script_dir = Path(__file__).parent
     repo_root = script_dir.parent
-    
-    # Define paths
-    yaml_file = repo_root / 'data' / 'animNode.yaml'
-    xsd_file = repo_root / 'schemas' / 'animNode.xsd'
 
+    output_path = repo_root / 'out' / 'data.json'
 
-    data_path = repo_root / 'data'
-    schemas_path = repo_root / 'schemas'
+    with open(output_path, 'r') as f:
+        data = json.load(f)
 
-    for yaml_file in data_path.glob('*.yaml'):
-        # name the schema the same as the yaml file but with .xsd extension
-        xsd_file = schemas_path / (yaml_file.stem + '.xsd')
+    for xml_name, xml_data in data.items():
+        xsd_file = repo_root / 'schemas' / f"{xml_name}.xsd"
 
-        # Generate the schema
-        create_xsd_from_yaml(yaml_file, xsd_file)
-
+        create_xsd_from_yaml(xml_data, xsd_file)

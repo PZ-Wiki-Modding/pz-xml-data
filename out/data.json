@@ -1,0 +1,409 @@
+{
+    "animNode": {
+        "pattern": [
+            "**/AnimSets/**/*.xml"
+        ],
+        "root": {
+            "name": "animNode",
+            "type": "type_AnimNode"
+        },
+        "types": {
+            "type_AnimNode": {
+                "type": "complex",
+                "composition": "choice",
+                "elements": [
+                    {
+                        "info": {
+                            "name": "m_Name",
+                            "type": "xs:string",
+                            "minOccurs": 1,
+                            "maxOccurs": 1
+                        },
+                        "description": "A unique identifier for this animation node. For example: \"LoadRiffle\", \"Walk\" etc. This is notably used to reference this animNode in other animNodes."
+                    },
+                    {
+                        "info": {
+                            "name": "m_AnimName",
+                            "type": "xs:string",
+                            "minOccurs": 1,
+                            "maxOccurs": 1
+                        },
+                        "description": "Name of the animation clip to play. This is the name of the animation file without the extension. The animation clip needs to be stored inside the `anims_X` folder and inside a subfolder which matches the character the animation is for. For the player, that subfolder needs to be `Bob`.\n\nFor example, take the animation file `Bob_Reload_Rifle_Load.glb` with the following folder structure:\n```\nanims_X/\n  Bob/\n    Bob_Reload_Rifle_Load.glb\n```\n\nTo reference it in the animNode, you would use:\n```xml\n<m_AnimName>Bob_Reload_Rifle_Load</m_AnimName>\n```"
+                    },
+                    {
+                        "info": {
+                            "name": "m_BlendTime",
+                            "type": "xs:float",
+                            "minOccurs": 0,
+                            "maxOccurs": 1
+                        },
+                        "description": "Defines how quickly the animation will begin to play, and how the game interpolates moving the armature's bones from one animNode to another. "
+                    },
+                    {
+                        "info": {
+                            "name": "m_blendOutTime",
+                            "type": "xs:float",
+                            "minOccurs": 0,
+                            "maxOccurs": 1
+                        },
+                        "description": "Defines how quickly the animation will end, and how the game interpolates moving the armature's bones from one animState to another. It is used to create a smooth transition when the animation is stopped or changed."
+                    },
+                    {
+                        "info": {
+                            "name": "m_SpeedScale",
+                            "type": [
+                                "xs:float",
+                                "xs:string"
+                            ],
+                            "minOccurs": 0,
+                            "maxOccurs": 1
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_Priority",
+                            "type": "xs:integer",
+                            "minOccurs": 0,
+                            "maxOccurs": 1
+                        },
+                        "description": "In cases of two animations that are playing at the same time, dictates which animation's bone weights or keyframes will take precedence. An example would be an idle animMask holding a glass which transitions into a drinking animation. The drinking animation takes priority over the idle drink-holding ainmMask if its priority is higher than the idle animation mask's XML. The priority value is an integer starting at 1 with high numbers taking the priority."
+                    },
+                    {
+                        "info": {
+                            "name": "m_maxTorsoTwist",
+                            "type": "xs:float",
+                            "minOccurs": 0,
+                            "maxOccurs": 1
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_Scalar",
+                            "type": [
+                                "xs:float",
+                                "xs:string"
+                            ],
+                            "minOccurs": 0
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_SyncTrackingEnabled",
+                            "type": "xs:boolean",
+                            "minOccurs": 0
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_2DBlends",
+                            "type": "type_2DBlends",
+                            "minOccurs": 0,
+                            "maxOccurs": "unbounded"
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_2DBlendTri",
+                            "type": "type_2DBlendTri",
+                            "minOccurs": 0,
+                            "maxOccurs": "unbounded"
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_Conditions",
+                            "type": "type_Condition",
+                            "minOccurs": 0,
+                            "maxOccurs": "unbounded"
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_Events",
+                            "type": "type_Events",
+                            "minOccurs": 0,
+                            "maxOccurs": "unbounded"
+                        },
+                        "description": "Used to trigger different events during the animation at specific moments. This can be used to play sounds, set variables, and more. "
+                    },
+                    {
+                        "info": {
+                            "name": "m_Transitions",
+                            "type": "type_Transitions",
+                            "minOccurs": 0,
+                            "maxOccurs": "unbounded"
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_SubStateBoneWeights",
+                            "type": "type_SubStateBoneWeights",
+                            "minOccurs": 0,
+                            "maxOccurs": "unbounded"
+                        }
+                    }
+                ],
+                "attributes": [
+                    {
+                        "info": {
+                            "name": "x_extends",
+                            "type": "xs:string",
+                            "use": "optional"
+                        },
+                        "description": "Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure: \n```\nAnimSets/\n    Rifle/\n        LoadRifle.xml\n        LoadRifle_Alt.xml\n``` \n\nThe LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:\n```xml\n<animNode x_extends=\"LoadRifle.xml\"></animNode>\n```"
+                    }
+                ]
+            },
+            "type_2DBlends": {
+                "type": "complex",
+                "elements": [
+                    {
+                        "info": {
+                            "name": "m_AnimName",
+                            "type": "xs:string",
+                            "minOccurs": 1
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_XPos",
+                            "type": "xs:float",
+                            "minOccurs": 0
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_YPos",
+                            "type": "xs:float",
+                            "minOccurs": 0
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_SpeedScale",
+                            "type": "xs:float",
+                            "minOccurs": 0
+                        }
+                    }
+                ],
+                "attributes": [
+                    {
+                        "info": {
+                            "name": "referenceID",
+                            "type": "xs:integer",
+                            "minOccurs": 0
+                        }
+                    }
+                ]
+            },
+            "type_2DBlendTri": {
+                "type": "complex",
+                "elements": [
+                    {
+                        "info": {
+                            "name": "node1",
+                            "type": "xs:integer",
+                            "minOccurs": 0
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "node2",
+                            "type": "xs:integer",
+                            "minOccurs": 0
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "node3",
+                            "type": "xs:integer",
+                            "minOccurs": 0
+                        }
+                    }
+                ]
+            },
+            "type_Condition": {
+                "type": "complex",
+                "elements": [
+                    {
+                        "info": {
+                            "name": "m_Name",
+                            "type": "xs:string",
+                            "minOccurs": 0
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_Type",
+                            "type": "enum_Type",
+                            "minOccurs": 0
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_Condition",
+                            "type": "xs:string",
+                            "minOccurs": 0
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_Value",
+                            "type": "xs:string",
+                            "minOccurs": 0
+                        }
+                    }
+                ],
+                "attributes": [
+                    {
+                        "info": {
+                            "name": "x_name",
+                            "type": "xs:string",
+                            "use": "optional"
+                        },
+                        "description": "This is unused by the game but it seems to be a simple identifier (often a [GUID](https://pzwiki.net/wiki/GUID)) used by the unreleased [AnimZed](https://pzwiki.net/wiki/AnimZed)."
+                    }
+                ]
+            },
+            "type_Events": {
+                "type": "complex",
+                "elements": [
+                    {
+                        "info": {
+                            "name": "m_EventName",
+                            "type": "xs:string",
+                            "minOccurs": 0,
+                            "maxOccurs": 1
+                        },
+                        "description": "The name of the event to trigger. This can be a custom name but there's also available events that will trigger specific actions. You can find a list of available events [here](https://pzwiki.net/wiki/Events#Available_events)."
+                    },
+                    {
+                        "info": {
+                            "name": "m_Time",
+                            "type": "xs:string",
+                            "minOccurs": 0,
+                            "maxOccurs": 1
+                        },
+                        "description": "The moment during the animation when the event will be triggered. This can be set to Start or End. "
+                    },
+                    {
+                        "info": {
+                            "name": "m_TimePc",
+                            "type": "xs:float",
+                            "minOccurs": 0,
+                            "maxOccurs": 1
+                        },
+                        "description": "The moment during the animation when the event will be triggered. This uses a normalized time, so `0` is the start and `1` is the end. In comparison to `m_Time`, this allows for more precision of when to trigger the event."
+                    },
+                    {
+                        "info": {
+                            "name": "m_ParameterValue",
+                            "type": "xs:string",
+                            "minOccurs": 0,
+                            "maxOccurs": 1
+                        },
+                        "description": "The value to pass to the event when it is triggered. This can be used to specify which sound to play, which variable to set, and more, depending on the event being triggered. "
+                    }
+                ],
+                "attributes": [
+                    {
+                        "info": {
+                            "name": "x_name",
+                            "type": "xs:string",
+                            "use": "optional"
+                        },
+                        "#desc": "type_Condition/attributes/x_name"
+                    }
+                ]
+            },
+            "type_Transitions": {
+                "type": "complex",
+                "elements": [
+                    {
+                        "info": {
+                            "name": "m_Target",
+                            "type": "xs:string",
+                            "minOccurs": 0
+                        },
+                        "description": "The name of the target animNode to transition to. This is the value of the `m_Name` field in the target animNode."
+                    },
+                    {
+                        "info": {
+                            "name": "m_AnimName",
+                            "type": "xs:string",
+                            "minOccurs": 0
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_blendInTime",
+                            "type": "xs:float",
+                            "minOccurs": 0
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_blendOutTime",
+                            "type": "xs:float",
+                            "minOccurs": 0
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "m_speedScale",
+                            "type": "xs:float",
+                            "minOccurs": 0
+                        }
+                    }
+                ]
+            },
+            "type_SubStateBoneWeights": {
+                "type": "complex",
+                "elements": [
+                    {
+                        "info": {
+                            "name": "boneName",
+                            "type": "xs:string",
+                            "minOccurs": 1
+                        }
+                    },
+                    {
+                        "info": {
+                            "name": "includeDescendants",
+                            "type": "xs:boolean",
+                            "minOccurs": 0
+                        }
+                    }
+                ]
+            },
+            "enum_Type": {
+                "type": "simple",
+                "restriction": {
+                    "base": "xs:string",
+                    "enumeration": [
+                        {
+                            "info": {
+                                "value": "STRING"
+                            }
+                        },
+                        {
+                            "info": {
+                                "value": "BOOL"
+                            }
+                        },
+                        {
+                            "info": {
+                                "value": "INT"
+                            }
+                        },
+                        {
+                            "info": {
+                                "value": "FLOAT"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

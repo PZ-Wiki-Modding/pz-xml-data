@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "XML Schema Definition (YAML Format)",
+  "description": "JSON schema for validating YAML files that define XML schemas (e.g., animNode.yaml, clothingItem.yaml)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "Description of the XML schema"
+    },
+    "patterns": {
+      "type": "array",
+      "description": "File patterns this schema applies to",
+      "items": {
+        "type": "string"
+      }
+    },
+    "root": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Root element definition",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the root element"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type reference for the root element"
+        }
+      },
+      "required": ["name", "type"]
+    },
+    "types": {
+      "type": "object",
+      "description": "Type definitions",
+      "additionalProperties": {
+        "$ref": "#/definitions/typeDefinition"
+      }
+    }
+  },
+  "required": ["description", "patterns", "root", "types"],
+  "definitions": {
+    "typeDefinition": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["simple", "complex"],
+          "description": "Whether this is a simple or complex type"
+        },
+        "composition": {
+          "type": "string",
+          "enum": ["choice", "sequence"],
+          "description": "How elements are composed (for complex types)"
+        },
+        "elements": {
+          "type": "array",
+          "description": "Element definitions (for complex types)",
+          "items": {
+            "$ref": "#/definitions/elementDefinition"
+          }
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Attribute definitions",
+          "items": {
+            "$ref": "#/definitions/attributeDefinition"
+          }
+        },
+        "restriction": {
+          "$ref": "#/definitions/restrictionDefinition",
+          "description": "Type restriction (for simple types)"
+        }
+      },
+      "required": ["type"]
+    },
+    "elementDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "info": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Element name"
+            },
+            "type": {
+              "oneOf": [
+                { "type": "string" },
+                { "type": "array", "items": { "type": "string" } }
+              ],
+              "description": "Element type (string or array of strings for unions)"
+            },
+            "minOccurs": {
+              "oneOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "string" }
+              ],
+              "description": "Minimum occurrences"
+            },
+            "maxOccurs": {
+              "oneOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "string", "enum": ["unbounded"] }
+              ],
+              "description": "Maximum occurrences"
+            }
+          },
+          "required": ["name", "type"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Element description and documentation"
+        }
+      },
+      "required": ["info"]
+    },
+    "attributeDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "info": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Attribute name"
+            },
+            "type": {
+              "type": "string",
+              "description": "Attribute type"
+            },
+            "use": {
+              "type": "string",
+              "enum": ["required", "optional"],
+              "description": "Whether attribute is required or optional"
+            }
+          },
+          "required": ["name", "type"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Attribute description"
+        },
+        "#desc": {
+          "type": "string",
+          "description": "Link to another description"
+        }
+      },
+      "required": ["info"]
+    },
+    "restrictionDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "base": {
+          "type": "string",
+          "description": "Base type to restrict"
+        },
+        "enumeration": {
+          "type": "array",
+          "description": "Enumeration values",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "info": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "description": "Enum value"
+                  }
+                },
+                "required": ["value"]
+              }
+            },
+            "required": ["info"]
+          }
+        }
+      },
+      "required": ["base"]
+    }
+  }
+}

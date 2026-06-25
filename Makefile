@@ -1,5 +1,5 @@
 .ONESHELL:
-.PHONY: help format
+.PHONY: help generate format settings run doc
 
 SHELL := /bin/bash
 

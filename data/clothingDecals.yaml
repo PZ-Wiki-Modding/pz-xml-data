@@ -1,0 +1,86 @@
+# yaml-language-server: $schema: ../.schemas/data_schema.json
+
+description: |-
+  Define decal groups for clothing items to use. Seems to be only used for shirts in the vanilla game and it is unknown if they can be used for other clothing items. The decal groups are linked to clothing items via the [m_DecalGroup](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-decalgroup) parameter. They can also be linked to other decal groups via the [group](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#group) parameter, allowing a decal group to use decals from another decal group.
+
+  The syntax of this file should be as follows:
+  ```xml
+  <?xml version="1.0" encoding="utf-8"?>
+  <clothingDecals>
+    <group>
+      <name>MyDecalGroup</name>
+      <decal>myDecal</decal>
+      <decal>anotherDecal</decal>
+    </group>
+    <group>
+      <name>MyOtherDecalGroup</name>
+      <group>MyDecalGroup</group>
+    </group>
+    <group>
+      <name>MyThirdDecalGroup</name>
+      <decal>thirdDecal</decal>
+      <group>MyOtherDecalGroup</group>
+    </group>
+  </clothingDecals>
+  ```
+patterns:
+- '**/clothing/clothingDecals.xml'
+root:
+  name: clothingDecals
+  type: type_clothingDecals
+types:
+
+# ROOT TYPE
+  type_clothingDecals:
+    type: complex
+    composition: choice
+    elements:
+    - info:
+        name: group
+        type: type_clothingDecalGroup
+        minOccurs: 0
+        maxOccurs: unbounded
+      description: |-
+        Defines a decal group, that is a collection of decals associated to a name for referencing.
+  
+  type_clothingDecalGroup:
+    type: complex
+    composition: choice
+    elements:
+    - info:
+        name: name
+        type: xs:string
+        minOccurs: 1
+        maxOccurs: 1
+      description: |-
+        A unique identifier for the decal group.
+    - info:
+        name: decal
+        type: xs:string
+        minOccurs: 0
+        maxOccurs: unbounded
+      description: |-
+        Refers to a texture file stored inside the folder `media/textures/shirtdecals/`. The value needs to be the name of the file without the extension (which needs to be `.png`). Alternatively, it seems the game also accepts decals inside texture packs.
+
+        For example, for the following file structure:
+        ```
+        📁 MyMod
+          📁 media
+            📁 textures
+              📁 shirtdecals
+                📄 myDecal.png
+                📄 anotherDecal.png
+        ```
+
+        The decal parameter should have this following syntax:
+        ```
+        <decal>myDecal</decal>
+        <decal>anotherDecal</decal>
+        ```
+    - info:
+        name: group
+        type: xs:string
+        minOccurs: 0
+        maxOccurs: unbounded
+      description: |-
+        Refers to another [group](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#group). This allows that group to use decals of the referenced group.

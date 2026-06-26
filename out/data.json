@@ -1,4 +1,64 @@
 {
+  "clothingDecals": {
+    "description": "Define decal groups for clothing items to use. Seems to be only used for shirts in the vanilla game and it is unknown if they can be used for other clothing items. The decal groups are linked to clothing items via the [m_DecalGroup](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-decalgroup) parameter. They can also be linked to other decal groups via the [group](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#group) parameter, allowing a decal group to use decals from another decal group.\n\nThe syntax of this file should be as follows:\n```xml\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<clothingDecals>\n  <group>\n    <name>MyDecalGroup</name>\n    <decal>myDecal</decal>\n    <decal>anotherDecal</decal>\n  </group>\n  <group>\n    <name>MyOtherDecalGroup</name>\n    <group>MyDecalGroup</group>\n  </group>\n  <group>\n    <name>MyThirdDecalGroup</name>\n    <decal>thirdDecal</decal>\n    <group>MyOtherDecalGroup</group>\n  </group>\n</clothingDecals>\n```",
+    "patterns": [
+      "**/clothing/clothingDecals.xml"
+    ],
+    "root": {
+      "name": "clothingDecals",
+      "type": "type_clothingDecals"
+    },
+    "types": {
+      "type_clothingDecals": {
+        "type": "complex",
+        "composition": "choice",
+        "elements": [
+          {
+            "info": {
+              "name": "group",
+              "type": "type_clothingDecalGroup",
+              "minOccurs": 0,
+              "maxOccurs": "unbounded"
+            },
+            "description": "Defines a decal group, that is a collection of decals associated to a name for referencing."
+          }
+        ]
+      },
+      "type_clothingDecalGroup": {
+        "type": "complex",
+        "composition": "choice",
+        "elements": [
+          {
+            "info": {
+              "name": "name",
+              "type": "xs:string",
+              "minOccurs": 1,
+              "maxOccurs": 1
+            },
+            "description": "A unique identifier for the decal group."
+          },
+          {
+            "info": {
+              "name": "decal",
+              "type": "xs:string",
+              "minOccurs": 0,
+              "maxOccurs": "unbounded"
+            },
+            "description": "Refers to a texture file stored inside the folder `media/textures/shirtdecals/`. The value needs to be the name of the file without the extension (which needs to be `.png`). Alternatively, it seems the game also accepts decals inside texture packs.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 MyMod\n  \ud83d\udcc1 media\n    \ud83d\udcc1 textures\n      \ud83d\udcc1 shirtdecals\n        \ud83d\udcc4 myDecal.png\n        \ud83d\udcc4 anotherDecal.png\n```\n\nThe decal parameter should have this following syntax:\n```\n<decal>myDecal</decal>\n<decal>anotherDecal</decal>\n```"
+          },
+          {
+            "info": {
+              "name": "group",
+              "type": "xs:string",
+              "minOccurs": 0,
+              "maxOccurs": "unbounded"
+            },
+            "description": "Refers to another [group](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#group). This allows that group to use decals of the referenced group."
+          }
+        ]
+      }
+    }
+  },
   "animNode": {
     "description": "The AnimNode files are used to link animation files to the game by defining different parameters for the animation. This will notably control the speed of the animation, its blending with animations played before and after, events that need to be triggered and conditions that control when that animation can be played.",
     "patterns": [
@@ -764,6 +824,24 @@
               "maxOccurs": 1
             },
             "description": "Seems to be used to specify if a hat will hide the hair and beard. Notable values are:\n- `default`\n- `nohairnobeard`\n- `nobeard`\n- `nohair`\n\nThen values `Group` followed by a number `01`, `02`, etc are also used."
+          },
+          {
+            "info": {
+              "name": "m_SpawnWith",
+              "type": "xs:string",
+              "minOccurs": 0,
+              "maxOccurs": "unbounded"
+            },
+            "description": "Link to other items that this clothingItem should spawn with. This is for example used to make left and right elbow pads spawn together. The value needs to be the [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the other clothing item.\n\nTo add multiple items, you can add multiple `<m_SpawnWith>` elements:\n```xml\n<m_SpawnWith>GUID1</m_SpawnWith>\n<m_SpawnWith>GUID2</m_SpawnWith>\n<m_SpawnWith>GUID3</m_SpawnWith>\n...\n```"
+          },
+          {
+            "info": {
+              "name": "m_DecalGroup",
+              "type": "xs:string",
+              "minOccurs": 0,
+              "maxOccurs": 1
+            },
+            "description": "Refers to the [name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#name) parameter of a decal group defined in the [clothingDecals.xml](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html) file. The clothing decals are used to add additional textures on top of the clothing item. This is most notably used to add logos on t-shirts, and it is possible to add multiple logos on a single decal group."
           }
         ]
       }

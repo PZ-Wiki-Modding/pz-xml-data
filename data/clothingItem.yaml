@@ -178,3 +178,25 @@ types:
         - `nohair`
 
         Then values `Group` followed by a number `01`, `02`, etc are also used.
+    - info:
+        name: m_SpawnWith
+        type: xs:string
+        minOccurs: 0
+        maxOccurs: unbounded
+      description: |-
+        Link to other items that this clothingItem should spawn with. This is for example used to make left and right elbow pads spawn together. The value needs to be the [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the other clothing item.
+
+        To add multiple items, you can add multiple `<m_SpawnWith>` elements:
+        ```xml
+        <m_SpawnWith>GUID1</m_SpawnWith>
+        <m_SpawnWith>GUID2</m_SpawnWith>
+        <m_SpawnWith>GUID3</m_SpawnWith>
+        ...
+        ```
+    - info:
+        name: m_DecalGroup
+        type: xs:string
+        minOccurs: 0
+        maxOccurs: 1
+      description: |-
+        Refers to the [name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#name) parameter of a decal group defined in the [clothingDecals.xml](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html) file. The clothing decals are used to add additional textures on top of the clothing item. This is most notably used to add logos on t-shirts, and it is possible to add multiple logos on a single decal group.

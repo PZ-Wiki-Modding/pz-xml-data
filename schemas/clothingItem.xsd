@@ -142,6 +142,26 @@ Then values <code>Group</code> followed by a number <code>01</code>, <code>02</c
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name="m_SpawnWith" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>Link to other items that this clothingItem should spawn with. This is for example used to make left and right elbow pads spawn together. The value needs to be the [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the other clothing item.</p><p>To add multiple items, you can add multiple <code>&amp;lt;m_SpawnWith&amp;gt;</code> elements:
+``<code>xml
+&amp;lt;m_SpawnWith&amp;gt;GUID1&amp;lt;/m_SpawnWith&amp;gt;
+&amp;lt;m_SpawnWith&amp;gt;GUID2&amp;lt;/m_SpawnWith&amp;gt;
+&amp;lt;m_SpawnWith&amp;gt;GUID3&amp;lt;/m_SpawnWith&amp;gt;
+...
+</code>``</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_DecalGroup" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>Refers to the [name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#name) parameter of a decal group defined in the [clothingDecals.xml](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html) file. The clothing decals are used to add additional textures on top of the clothing item. This is most notably used to add logos on t-shirts, and it is possible to add multiple logos on a single decal group.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:choice>
   </xs:complexType>
 </xs:schema>

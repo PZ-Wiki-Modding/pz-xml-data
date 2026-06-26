@@ -1,0 +1,180 @@
+# yaml-language-server: $schema: ../.schemas/data_schema.json
+
+description: |-
+  The AnimNode files are used to link animation files to the game by defining different parameters for the animation. This will notably control the speed of the animation, its blending with animations played before and after, events that need to be triggered and conditions that control when that animation can be played.
+patterns:
+- '**/clothing/clothingItems/**/*.xml'
+root:
+  name: clothingItem
+  type: type_clothingItem
+types:
+
+# ROOT TYPE
+  type_clothingItem:
+    type: complex
+    composition: choice
+    elements:
+    - info:
+        name: m_MaleModel
+        type: xs:string
+        minOccurs: 1
+        maxOccurs: 1
+      description: |-
+        The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters **should** be left empty when the clothing item is a body texture.
+        
+        The model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in `media/models_X` and accessed relative to it.
+
+        For example, for the following file structure:
+        ```
+        📁 MyMod
+          📁 media
+            📁 models_X
+              📁 MyAwesomeClothing
+                📄 myClothing.fbx
+        ```
+        
+        These parameters should have this following syntax:
+        ```
+        <m_MaleModel>MyAwesomeClothing/myClothing</m_MaleModel>
+        ```
+
+        The path separators can be either unix with `/` or `\\`, both are valid. Make sure to not add the extension.
+
+        [m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in `media/lua/shared/NPCs/BodyLocations.lua` for the vanilla game).
+    - info:
+        name: m_FemaleModel
+        type: xs:string
+        minOccurs: 1
+        maxOccurs: 1
+      "#desc": type_clothingItem/elements/m_MaleModel
+    - info:
+        name: m_AltMaleModel
+        type: xs:string
+        minOccurs: 0
+        maxOccurs: 1
+      "#desc": type_clothingItem/elements/m_MaleModel
+    - info:
+        name: m_AltFemaleModel
+        type: xs:string
+        minOccurs: 0
+        maxOccurs: 1
+      "#desc": type_clothingItem/elements/m_MaleModel
+    - info:
+        name: m_GUID
+        type: xs:string
+        minOccurs: 1
+        maxOccurs: 1
+      description: |-
+        The [GUID](https://pzwiki.net/wiki/GUID) of the clothing item.
+    - info:
+        name: m_Static
+        type: xs:boolean
+        minOccurs: 1
+        maxOccurs: 1
+      description: |-
+        If `true`, the clothing item won't deform with the character's body. This is used for items like backpacks or hats that should not change shape with the character's body.
+    - info:
+        name: m_AllowRandomHue
+        type: xs:boolean
+        minOccurs: 1
+        maxOccurs: 1
+      description: |-
+        When [m_AllowRandomHue](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomhue) or [m_AllowRandomTint](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomtint) are set to `true`, the clothing item will respectively have a random hue or tint applied to it. m_AllowRandomHue doesn't seem to be impactful on the clothing item as much as m_AllowRandomTint, which will apply the random color on white areas of the clothing item.
+    - info:
+        name: m_AllowRandomTint
+        type: xs:boolean
+        minOccurs: 1
+        maxOccurs: 1
+      "#desc": type_clothingItem/elements/m_AllowRandomHue
+    - info:
+        name: m_AttachBone
+        type: xs:string
+        minOccurs: 1
+        maxOccurs: 1
+      description: |-
+        Specifies a bone to attach the clothing item to. Mostly notably used for hats and some arm protection items. To attach to the head, use `Bip01_Head`.
+    - info:
+        name: m_Shader
+        type: xs:string
+        minOccurs: 1
+        maxOccurs: 1
+      description: |-
+        Specifies a shader to use for the clothing item. The default shader used by clothing items is `basicEffect`. The value needs to be the filename of the shader inside the folder `media/shaders`.
+    - info:
+        name: textureChoices
+        type: xs:string
+        minOccurs: 0
+        maxOccurs: unbounded
+      description: |-
+        [textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices) sets the texture used by the clothing item. Many of those can be provided as random choices for the clothing item. The textures need to be stored in the folder `media/textures`.
+
+        For example, for the following file structure:
+        ```
+        📁 MyMod
+          📁 media
+            📁 textures
+              📁 CoolMod
+                📄 texture1.png
+                📄 texture2.png
+        ```
+
+        You'd have:
+        ```xml
+        <textureChoices>CoolMod/texture1</textureChoices>
+        <textureChoices>CoolMod/texture2</textureChoices>
+        ```
+
+        [m_BaseTextures](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-basetextures) is used specifically for 2D clothing items that are applied on the character's body directly (tshirts, pants, socks...). The folder structure is the same as for [textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices).
+    - info:
+        name: m_BaseTextures
+        type: xs:string
+        minOccurs: 0
+        maxOccurs: unbounded
+      "#desc": type_clothingItem/elements/textureChoices
+    - info:
+        name: m_Masks
+        type: xs:integer
+        minOccurs: 0
+        maxOccurs: unbounded
+      description: |-
+        [m_Masks](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-masks) when set to a specific integer value will hide specific elements of the character's body model. This is notably used to remove clipping with body parts that are hidden by the clothing item. For example, a jacket will hide the torso and arms, so to reduce risks of clipping you may want to hide these.
+
+        You can find a list of the values and their corresponding body parts in the Project Zomboid Modding Archives [here](https://github.com/PZ-Wiki-Modding/Archive.Project-Zomboid-Modding/blob/main/Clothing/Masks/Mask.png).
+
+        You can insert as many of these as you want, for example:
+        ```xml
+        <m_Masks>12</m_Masks>
+        <m_Masks>13</m_Masks>
+        <m_Masks>14</m_Masks>
+        <m_Masks>3</m_Masks>
+        <m_Masks>5</m_Masks>
+        ```
+
+        [m_UnderlayMasksFolder](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-underlaymasksfolder) supposedly is used to add a texture folder in which you have modified versions of these masks if you ever need to adjust the masks for your own clothing items without clashing with other mods custom masks.
+    - info:
+        name: m_MasksFolder
+        type: xs:string
+        minOccurs: 1
+        maxOccurs: 1
+      description: |-
+        Default value is `media/textures/Body/Masks`. Some clothing behaviors seem to be hardcoded to this path. You can notably use it to deactivate masks by setting the value to `media/textures/Clothes/Hat/Masks`, but it will also deactivate damage (holes) and blood effects.
+    - info:
+        name: m_UnderlayMasksFolder
+        type: xs:string
+        minOccurs: 1
+        maxOccurs: 1
+      description: |-
+        Default value is `media/textures/Body/UnderlayMasks`. Some clothing behaviors seem to be hardcoded to this path.
+    - info:
+        name: m_HatCategory
+        type: xs:string
+        minOccurs: 1
+        maxOccurs: 1
+      description: |-
+        Seems to be used to specify if a hat will hide the hair and beard. Notable values are:
+        - `default`
+        - `nohairnobeard`
+        - `nobeard`
+        - `nohair`
+
+        Then values `Group` followed by a number `01`, `02`, etc are also used.

@@ -3,6 +3,10 @@
     {
       "pattern": "**/AnimSets/**/*.xml",
       "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/schemas/animNode.xsd"
+    },
+    {
+      "pattern": "**/clothing/clothingItems/**/*.xml",
+      "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/schemas/clothingItem.xsd"
     }
   ]
 }

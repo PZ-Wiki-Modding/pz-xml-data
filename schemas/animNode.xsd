@@ -187,7 +187,13 @@
         </xs:annotation>
       </xs:element>
     </xs:all>
-    <xs:attribute name="x_name" type="xs:string" use="optional"/>
+    <xs:attribute name="x_name" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation><![CDATA[
+        <p>This is unused by the game but it seems to be a simple identifier (often a [GUID](https://pzwiki.net/wiki/GUID)) used by the unreleased [AnimZed](https://pzwiki.net/wiki/AnimZed).</p>
+        ]]></xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:complexType name="type_Transitions">
     <xs:choice minOccurs="0" maxOccurs="unbounded">

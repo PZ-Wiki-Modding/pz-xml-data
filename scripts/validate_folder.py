@@ -44,11 +44,13 @@ for xml_type, xml_data in xml.items():
         match_idx = 0
         for i, pattern_part in enumerate(pattern_parts):
             if pattern_part.startswith("*"):
+                print(f"Warning: Pattern '{pattern}' contains a wildcard '*' which may not match folder structure correctly.")
                 break
             # Check if this pattern part is in the folder path
             if pattern_part in folder_parts:
                 match_idx = i + 1
             else:
+                print(f"Warning: Pattern '{pattern}' does not match folder structure. Stopping at part '{pattern_part}'.")
                 break
         
         # If we found matches, use the remaining pattern

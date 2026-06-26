@@ -115,6 +115,10 @@
         "description": {
           "type": "string",
           "description": "Element description and documentation"
+        },
+        "#desc": {
+          "type": "string",
+          "description": "Link to another description"
         }
       },
       "required": ["info"]

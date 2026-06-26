@@ -1,7 +1,7 @@
 # yaml-language-server: $schema: ../.schemas/data_schema.json
 
 description: |-
-  The AnimNode files are used to link animation files to the game by defining different parameters for the animation. This will notably control the speed of the animation, its blending with animations played before and after, events that need to be triggered and conditions that control when that animation can be played.
+  The clothing item files are used to define the 3D models and textures used for clothing items in the game. 
 patterns:
 - '**/clothing/clothingItems/**/*.xml'
 root:

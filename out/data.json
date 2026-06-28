@@ -59,6 +59,169 @@
       }
     }
   },
+  "clothing": {
+    "description": "Define outfits for the male and female characters that can be used on zombies or the player. Items are provided with a probability value to define how likely they are to appear in the outfit.\n\nThe file should be stored at the exact path `media/clothing/clothing.xml` and won't clash with other mods or the vanilla game file. The syntax of this file should be as follows:\n```xml\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<outfitManager>\n  <m_FemaleOutfits>\n    <m_Name>MyOutfit</m_Name>\n    <m_Guid>my-outfit-guid</m_Guid>\n    <m_items>\n      <item>\n        <probability>0.5</probability>\n        <itemGUID>my-clothing-item-guid</itemGUID>\n      </item>\n      <item>\n        <probability>0.5</probability>\n        <itemGUID>my-other-clothing-item-guid</itemGUID>\n        <subItems>\n          <subItem>\n            <itemGUID>my-sub-clothing-item-guid</itemGUID>\n          </subItem>\n        </subItems>\n      </item>\n    </m_items>\n  </m_MaleOutfits>\n    <m_Name>MyOutfit</m_Name>\n    <m_Guid>my-outfit-guid</m_Guid>\n    <m_items>\n      <item>\n        <probability>0.5</probability>\n        <itemGUID>my-clothing-item-guid</itemGUID>\n      </item>\n      <item>\n        <probability>0.5</probability>\n        <itemGUID>my-other-clothing-item-guid</itemGUID>\n        <subItems>\n          <subItem>\n            <itemGUID>my-sub-clothing-item-guid</itemGUID>\n          </subItem>\n        </subItems>\n      </item>\n    </m_items>\n  </m_MaleOutfits>\n</outfitManager>\n```",
+    "patterns": [
+      "**/clothing/clothing.xml"
+    ],
+    "root": {
+      "name": "outfitManager",
+      "type": "type_clothing"
+    },
+    "types": {
+      "type_clothing": {
+        "type": "complex",
+        "composition": "choice",
+        "elements": [
+          {
+            "info": {
+              "name": "m_FemaleOutfits",
+              "type": "type_outfit"
+            },
+            "description": "Define an outfit with [m_FemaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-femaleoutfits) and [m_MaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-maleoutfits) respectively for the female and male characters. If one of the two is not defined, it won't spawn naturally on the other gender in the game. Both male and female outfits can (and probably should) keep the same [m_Name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-name) and [m_Guid](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-guid) values."
+          },
+          {
+            "info": {
+              "name": "m_MaleOutfits",
+              "type": "type_outfit"
+            },
+            "#desc": "type_clothing/elements/m_FemaleOutfits",
+            "description": "Define an outfit with [m_FemaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-femaleoutfits) and [m_MaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-maleoutfits) respectively for the female and male characters. If one of the two is not defined, it won't spawn naturally on the other gender in the game. Both male and female outfits can (and probably should) keep the same [m_Name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-name) and [m_Guid](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-guid) values."
+          }
+        ]
+      },
+      "type_outfit": {
+        "type": "complex",
+        "composition": "choice",
+        "elements": [
+          {
+            "info": {
+              "name": "m_Name",
+              "type": "xs:string",
+              "minOccurs": 1,
+              "maxOccurs": 1
+            },
+            "description": "The unique identifier for the outfit. Preferably keep it the same for the male and female variants."
+          },
+          {
+            "info": {
+              "name": "m_Guid",
+              "type": "xs:string",
+              "minOccurs": 1,
+              "maxOccurs": 1
+            },
+            "description": "The [GUID](https://pzwiki.net/wiki/GUID) of the outfit. "
+          },
+          {
+            "info": {
+              "name": "m_Top",
+              "type": "xs:boolean",
+              "minOccurs": 0,
+              "maxOccurs": 1
+            },
+            "description": "If set to `true`, the outfit will spawn with random pants or shirts, respectivement for the parameters [m_Pants](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-pants) and [m_Top](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-top). When those two parameters are not set, they default to `true`."
+          },
+          {
+            "info": {
+              "name": "m_Pants",
+              "type": "xs:boolean",
+              "minOccurs": 0,
+              "maxOccurs": 1
+            }
+          },
+          {
+            "info": {
+              "name": "m_AllowPantsHue",
+              "type": "xs:boolean",
+              "minOccurs": 0,
+              "maxOccurs": 1
+            }
+          },
+          {
+            "info": {
+              "name": "m_AllowTopTint",
+              "type": "xs:boolean",
+              "minOccurs": 0,
+              "maxOccurs": 1
+            }
+          },
+          {
+            "info": {
+              "name": "m_AllowPantsTint",
+              "type": "xs:boolean",
+              "minOccurs": 0,
+              "maxOccurs": 1
+            }
+          },
+          {
+            "info": {
+              "name": "m_AllowTShirtDecal",
+              "type": "xs:boolean",
+              "minOccurs": 0,
+              "maxOccurs": 1
+            }
+          },
+          {
+            "info": {
+              "name": "m_items",
+              "type": "type_item",
+              "minOccurs": 1,
+              "maxOccurs": "unbounded"
+            }
+          }
+        ]
+      },
+      "type_item": {
+        "type": "complex",
+        "composition": "choice",
+        "elements": [
+          {
+            "info": {
+              "name": "probability",
+              "type": "xs:float",
+              "minOccurs": 1,
+              "maxOccurs": 1
+            },
+            "description": "The probability of the item being selected for the outfit. Needs to be a value between 0.0 and 1.0."
+          },
+          {
+            "info": {
+              "name": "itemGUID",
+              "type": "xs:string",
+              "minOccurs": 1,
+              "maxOccurs": 1
+            },
+            "description": "The [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the clothing item that should be part of the outfit. You can define extra outfits thanks to the [subItems](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-subitems) parameter."
+          },
+          {
+            "info": {
+              "name": "subItems",
+              "type": "type_subItem",
+              "minOccurs": 0,
+              "maxOccurs": "unbounded"
+            },
+            "description": "Define a sub-item for a specific clothing item used in the outfit, so other items can also be picked."
+          }
+        ]
+      },
+      "type_subItem": {
+        "type": "complex",
+        "composition": "choice",
+        "elements": [
+          {
+            "info": {
+              "name": "itemGUID",
+              "type": "xs:string",
+              "minOccurs": 1,
+              "maxOccurs": 1
+            },
+            "#desc": "type_item/elements/itemGUID",
+            "description": "The [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the clothing item that should be part of the outfit. You can define extra outfits thanks to the [subItems](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-subitems) parameter."
+          }
+        ]
+      }
+    }
+  },
   "animNode": {
     "description": "The AnimNode files are used to link animation files to the game by defining different parameters for the animation. This will notably control the speed of the animation, its blending with animations played before and after, events that need to be triggered and conditions that control when that animation can be played.",
     "patterns": [

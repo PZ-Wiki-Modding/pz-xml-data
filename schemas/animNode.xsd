@@ -117,7 +117,7 @@
     <xs:attribute name="x_extends" type="xs:string" use="optional">
       <xs:annotation>
         <xs:documentation><![CDATA[
-        <p>Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure:</p><pre><code>📁 AnimSets</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 Rifle</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 LoadRifle.xml</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 LoadRifle_Alt.xml</code></pre><p>The LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:
+        <p>Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure:</p><pre><code>📁 AnimSets</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 Rifle</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 LoadRifle.xml</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 LoadRifle_Alt.xml</code></pre><p>The LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:
 ``<code>xml
 &amp;lt;animNode x_extends="LoadRifle.xml"&amp;gt;&amp;lt;/animNode&amp;gt;
 </code>``</p>

@@ -89,7 +89,7 @@
               "minOccurs": 0,
               "maxOccurs": 1
             },
-            "description": "Name of the animation clip to play. This is the name of the animation file without the extension. The animation clip needs to be stored inside the `anims_X` folder and inside a subfolder which matches the character the animation is for. For the player, that subfolder needs to be `Bob`.\n\nFor example, take the animation file `Bob_Reload_Rifle_Load.glb` with the following folder structure:\n```\nanims_X/\n  Bob/\n    Bob_Reload_Rifle_Load.glb\n```\n\nTo reference it in the animNode, you would use:\n```xml\n<m_AnimName>Bob_Reload_Rifle_Load</m_AnimName>\n```"
+            "description": "Name of the animation clip to play. This is the name of the animation file without the extension. The animation clip needs to be stored inside the `anims_X` folder and inside a subfolder which matches the character the animation is for. For the player, that subfolder needs to be `Bob`.\n\nFor example, take the animation file `Bob_Reload_Rifle_Load.glb` with the following folder structure:\n```\n\ud83d\udcc1 anims_X\n  \ud83d\udcc1 Bob\n    \ud83d\udcc4 Bob_Reload_Rifle_Load.glb\n```\n\nTo reference it in the animNode, you would use:\n```xml\n<m_AnimName>Bob_Reload_Rifle_Load</m_AnimName>\n```"
           },
           {
             "info": {
@@ -352,7 +352,7 @@
               "type": "xs:string",
               "use": "optional"
             },
-            "description": "Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure: \n```\nAnimSets/\n    Rifle/\n        LoadRifle.xml\n        LoadRifle_Alt.xml\n``` \n\nThe LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:\n```xml\n<animNode x_extends=\"LoadRifle.xml\"></animNode>\n```"
+            "description": "Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure: \n```\n\ud83d\udcc1 AnimSets\n  \ud83d\udcc1 Rifle\n      \ud83d\udcc4 LoadRifle.xml\n        \ud83d\udcc4 LoadRifle_Alt.xml\n``` \n\nThe LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:\n```xml\n<animNode x_extends=\"LoadRifle.xml\"></animNode>\n```"
           }
         ]
       },

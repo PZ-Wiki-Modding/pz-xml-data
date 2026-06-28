@@ -15,7 +15,7 @@
       <xs:element name="m_Name" type="xs:string" minOccurs="1" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
-        <p>A unique identifier for this animation node. For example: &quot;LoadRiffle&quot;, &quot;Walk&quot; etc. This is notably used to reference this animNode in other animNodes.</p>
+        <p>A unique identifier for this animation node. For example: "LoadRiffle", "Walk" etc. This is notably used to reference this animNode in other animNodes.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -119,7 +119,7 @@
         <xs:documentation><![CDATA[
         <p>Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure:</p><pre><code>AnimSets/</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Rifle/</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;LoadRifle.xml</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;LoadRifle_Alt.xml</code></pre><p>The LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:
 ``<code>xml
-&amp;lt;animNode x_extends=&quot;LoadRifle.xml&quot;&amp;gt;&amp;lt;/animNode&amp;gt;
+&amp;lt;animNode x_extends="LoadRifle.xml"&amp;gt;&amp;lt;/animNode&amp;gt;
 </code>``</p>
         ]]></xs:documentation>
       </xs:annotation>

@@ -31,9 +31,9 @@ types:
 
         For example, take the animation file `Bob_Reload_Rifle_Load.glb` with the following folder structure:
         ```
-        anims_X/
-          Bob/
-            Bob_Reload_Rifle_Load.glb
+        📁 anims_X
+          📁 Bob
+            📄 Bob_Reload_Rifle_Load.glb
         ```
 
         To reference it in the animNode, you would use:
@@ -235,10 +235,10 @@ types:
       description: |-
         Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure: 
         ```
-        AnimSets/
-            Rifle/
-                LoadRifle.xml
-                LoadRifle_Alt.xml
+        📁 AnimSets
+          📁 Rifle
+              📄 LoadRifle.xml
+                📄 LoadRifle_Alt.xml
         ``` 
 
         The LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:

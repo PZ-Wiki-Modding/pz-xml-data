@@ -237,8 +237,8 @@ types:
         ```
         📁 AnimSets
           📁 Rifle
-              📄 LoadRifle.xml
-                📄 LoadRifle_Alt.xml
+            📄 LoadRifle.xml
+            📄 LoadRifle_Alt.xml
         ``` 
 
         The LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:

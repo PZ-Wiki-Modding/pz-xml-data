@@ -7,19 +7,16 @@
         ]]></xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:simpleType name="union_1">
-    <xs:union memberTypes="xs:float xs:string"/>
-  </xs:simpleType>
   <xs:complexType name="type_AnimNode">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="m_Name" type="xs:string" minOccurs="1" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>A unique identifier for this animation node. For example: "LoadRiffle", "Walk" etc. This is notably used to reference this animNode in other animNodes.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_AnimName" type="xs:string" minOccurs="0" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Name of the animation clip to play. This is the name of the animation file without the extension. The animation clip needs to be stored inside the <code>anims_X</code> folder and inside a subfolder which matches the character the animation is for. For the player, that subfolder needs to be <code>Bob</code>.</p><p>For example, take the animation file <code>Bob_Reload_Rifle_Load.glb</code> with the following folder structure:</p><pre><code>📁 anims_X</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 Bob</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 Bob_Reload_Rifle_Load.glb</code></pre><p>To reference it in the animNode, you would use:
@@ -29,47 +26,47 @@
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_BlendTime" type="xs:float" minOccurs="0" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Defines how quickly the animation will begin to play, and how the game interpolates moving the armature's bones from one animNode to another.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_BlendOutTime" type="xs:float" minOccurs="0" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Defines how quickly the animation will end, and how the game interpolates moving the armature's bones from one animState to another. It is used to create a smooth transition when the animation is stopped or changed.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_SpeedScale" type="union_1" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_SpeedScaleRandomMultiplierMin" type="xs:float" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_SpeedScaleRandomMultiplierMax" type="xs:float" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_TrackTimeToVariable" type="xs:string" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_Looped" type="xs:boolean" minOccurs="0" maxOccurs="1">
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Defines whether the animation will loop or not. If set to true, the animation will loop indefinitely until it is manually stopped or [conditions](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/animNode.html#m-conditions) are no longer met.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_AnimReverse" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_Priority" type="xs:integer" minOccurs="0" maxOccurs="1">
+      <xs:element/>
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>In cases of two animations that are playing at the same time, dictates which animation's bone weights or keyframes will take precedence. An example would be an idle animMask holding a glass which transitions into a drinking animation. The drinking animation takes priority over the idle drink-holding ainmMask if its priority is higher than the idle animation mask's XML. The priority value is an integer starting at 1 with high numbers taking the priority.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_ConditionPriority" type="xs:integer" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_maxTorsoTwist" type="xs:float" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_Scalar" type="union_1" minOccurs="0"/>
-      <xs:element name="m_Scalar2" type="union_1" minOccurs="0"/>
-      <xs:element name="m_SyncTrackingEnabled" type="xs:boolean" minOccurs="0"/>
-      <xs:element name="m_2DBlends" type="type_2DBlends" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="m_2DBlendTri" type="type_2DBlendTri" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="m_Conditions" type="type_Condition" minOccurs="0" maxOccurs="unbounded">
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Used to specify conditions that will allow an animation node to be chosen. If the conditions are not met, the node will not be chosen. These are often combined with the function [setVariable](https://demiurgequantified.github.io/ProjectZomboidJavaDocs/zombie/characters/IsoGameCharacter.html#setVariable(java.lang.String,java.lang.String)) (which exists in many forms) to set a specific condition.</p><p>This can notably be used to trigger an animation by setting that condition to be valid, which will make the animation node eligible to be chosen by the game, as long as other conditions are also met.</p><p>The syntax is as follows for the most common cases:
@@ -88,33 +85,33 @@
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_Events" type="type_Events" minOccurs="0" maxOccurs="unbounded">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Used to trigger different events during the animation at specific moments. This can be used to play sounds, set variables, and more. You can find a list of available events [here](https://pzwiki.net/wiki/Events#Available_events).</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_Transitions" type="type_Transitions" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="m_EarlyTransitionOut" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_StopAnimOnExit" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_SubStateBoneWeights" type="type_SubStateBoneWeights" minOccurs="0" maxOccurs="unbounded">
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Used to define the weight of a bone and its keyframes or descendants. By default, all bones that are not defined with this parameter have a default weight of <code>1</code>. If you wanted to make it so an animation were to only play a specific set of bones; you would define the Dummy01 or the Bip01 bones (the parent armature bones) to have a weight of 0, and then specifically define all the bones you wish to play to have a weight value greater than 0.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_DeferredBoneName" type="xs:string" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_deferredBoneAxis" type="xs:string" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_useDeferedRotation" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_MatchingGrappledAnimNode" type="xs:string" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_GrappleOffsetForward" type="xs:float" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_GrappleOffsetYaw" type="xs:integer" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_GrapplerOffsetBehaviour" type="xs:string" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_GrappleTweenInTime" type="xs:float" minOccurs="0" maxOccurs="1"/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
     </xs:choice>
-    <xs:attribute name="x_extends" type="xs:string" use="optional">
+    <xs:attribute name="attribute" type="xs:string">
       <xs:annotation>
         <xs:documentation><![CDATA[
         <p>Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure:</p><pre><code>📁 AnimSets</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 Rifle</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 LoadRifle.xml</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 LoadRifle_Alt.xml</code></pre><p>The LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:
@@ -127,28 +124,28 @@
   </xs:complexType>
   <xs:complexType name="type_2DBlends">
     <xs:all>
-      <xs:element name="m_AnimName" type="xs:string" minOccurs="0"/>
-      <xs:element name="m_XPos" type="xs:float" minOccurs="0"/>
-      <xs:element name="m_YPos" type="xs:float" minOccurs="0"/>
-      <xs:element name="m_SpeedScale" type="xs:float" minOccurs="0"/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
     </xs:all>
-    <xs:attribute name="referenceID" type="xs:integer"/>
+    <xs:attribute name="attribute" type="xs:string"/>
   </xs:complexType>
   <xs:complexType name="type_2DBlendTri">
     <xs:all>
-      <xs:element name="node1" type="xs:integer" minOccurs="0"/>
-      <xs:element name="node2" type="xs:integer" minOccurs="0"/>
-      <xs:element name="node3" type="xs:integer" minOccurs="0"/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
     </xs:all>
   </xs:complexType>
   <xs:complexType name="type_Condition">
     <xs:all>
-      <xs:element name="m_Name" type="xs:string" minOccurs="0"/>
-      <xs:element name="m_Type" type="enum_Type" minOccurs="0"/>
-      <xs:element name="m_Condition" type="xs:string" minOccurs="0"/>
-      <xs:element name="m_Value" type="xs:string" minOccurs="0"/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
     </xs:all>
-    <xs:attribute name="x_name" type="xs:string" use="optional">
+    <xs:attribute name="attribute" type="xs:string">
       <xs:annotation>
         <xs:documentation><![CDATA[
         <p>This is unused by the game but it seems to be a simple identifier (often a [GUID](https://pzwiki.net/wiki/GUID)) used by the unreleased [AnimZed](https://pzwiki.net/wiki/AnimZed).</p>
@@ -158,28 +155,28 @@
   </xs:complexType>
   <xs:complexType name="type_Events">
     <xs:all>
-      <xs:element name="m_EventName" type="xs:string" minOccurs="0" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The name of the event to trigger. This can be a custom name but there's also available events that will trigger specific actions. You can find a list of available events [here](https://pzwiki.net/wiki/Events#Available_events).</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_Time" type="xs:string" minOccurs="0" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The moment during the animation when the event will be triggered. This can be set to Start or End.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_TimePc" type="xs:float" minOccurs="0" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The moment during the animation when the event will be triggered. This uses a normalized time, so <code>0</code> is the start and <code>1</code> is the end. In comparison to <code>m_Time</code>, this allows for more precision of when to trigger the event.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_ParameterValue" type="xs:string" minOccurs="0" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The value to pass to the event when it is triggered. This can be used to specify which sound to play, which variable to set, and more, depending on the event being triggered.</p>
@@ -187,7 +184,7 @@
         </xs:annotation>
       </xs:element>
     </xs:all>
-    <xs:attribute name="x_name" type="xs:string" use="optional">
+    <xs:attribute name="attribute" type="xs:string">
       <xs:annotation>
         <xs:documentation><![CDATA[
         <p>This is unused by the game but it seems to be a simple identifier (often a [GUID](https://pzwiki.net/wiki/GUID)) used by the unreleased [AnimZed](https://pzwiki.net/wiki/AnimZed).</p>
@@ -197,39 +194,39 @@
   </xs:complexType>
   <xs:complexType name="type_Transitions">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="m_Target" type="xs:string" minOccurs="0">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The name of the target animNode to transition to. This is the value of the <code>m_Name</code> field in the target animNode.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_AnimName" type="xs:string" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_blendInTime" type="xs:float" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_blendOutTime" type="xs:float" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_speedScale" type="xs:float" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_Conditions" type="type_Condition" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
     </xs:choice>
   </xs:complexType>
   <xs:complexType name="type_SubStateBoneWeights">
     <xs:all>
-      <xs:element name="boneName" type="xs:string" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="includeDescendants" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="weight" type="xs:float" minOccurs="0" maxOccurs="1"/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
     </xs:all>
   </xs:complexType>
   <xs:simpleType name="enum_Type">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="STRING"/>
-      <xs:enumeration value="BOOL"/>
-      <xs:enumeration value="INT"/>
-      <xs:enumeration value="FLOAT"/>
-      <xs:enumeration value="OR"/>
-      <xs:enumeration value="EQU"/>
-      <xs:enumeration value="NEQ"/>
-      <xs:enumeration value="STRNEQ"/>
-      <xs:enumeration value="GTR"/>
-      <xs:enumeration value="LESS"/>
+      <xs:enumeration value=""/>
+      <xs:enumeration value=""/>
+      <xs:enumeration value=""/>
+      <xs:enumeration value=""/>
+      <xs:enumeration value=""/>
+      <xs:enumeration value=""/>
+      <xs:enumeration value=""/>
+      <xs:enumeration value=""/>
+      <xs:enumeration value=""/>
+      <xs:enumeration value=""/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

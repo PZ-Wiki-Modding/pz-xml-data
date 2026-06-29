@@ -9,14 +9,14 @@
   </xs:element>
   <xs:complexType name="type_clothing">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="m_FemaleOutfits" type="type_outfit">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Define an outfit with [m_FemaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-femaleoutfits) and [m_MaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-maleoutfits) respectively for the female and male characters. If one of the two is not defined, it won't spawn naturally on the other gender in the game. Both male and female outfits can (and probably should) keep the same [m_Name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-name) and [m_Guid](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-guid) values.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_MaleOutfits" type="type_outfit">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Define an outfit with [m_FemaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-femaleoutfits) and [m_MaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-maleoutfits) respectively for the female and male characters. If one of the two is not defined, it won't spawn naturally on the other gender in the game. Both male and female outfits can (and probably should) keep the same [m_Name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-name) and [m_Guid](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-guid) values.</p>
@@ -27,52 +27,52 @@
   </xs:complexType>
   <xs:complexType name="type_outfit">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="m_Name" type="xs:string" minOccurs="1" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The unique identifier for the outfit. Preferably keep it the same for the male and female variants.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_Guid" type="xs:string" minOccurs="1" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The [GUID](https://pzwiki.net/wiki/GUID) of the outfit.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_Top" type="xs:boolean" minOccurs="0" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>If set to <code>true</code>, the outfit will spawn with random pants or shirts, respectivement for the parameters [m_Pants](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-pants) and [m_Top](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-top). When those two parameters are not set, they default to <code>true</code>.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_Pants" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_AllowPantsHue" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_AllowTopTint" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_AllowPantsTint" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_AllowTShirtDecal" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="m_items" type="type_item" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
+      <xs:element/>
     </xs:choice>
   </xs:complexType>
   <xs:complexType name="type_item">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="probability" type="xs:float" minOccurs="1" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The probability of the item being selected for the outfit. Needs to be a value between 0.0 and 1.0.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="itemGUID" type="xs:string" minOccurs="1" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the clothing item that should be part of the outfit. You can define extra outfits thanks to the [subItems](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-subitems) parameter.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="subItems" type="type_subItem" minOccurs="0" maxOccurs="unbounded">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Define a sub-item for a specific clothing item used in the outfit, so other items can also be picked.</p>
@@ -83,7 +83,7 @@
   </xs:complexType>
   <xs:complexType name="type_subItem">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="itemGUID" type="xs:string" minOccurs="1" maxOccurs="1">
+      <xs:element>
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the clothing item that should be part of the outfit. You can define extra outfits thanks to the [subItems](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-subitems) parameter.</p>

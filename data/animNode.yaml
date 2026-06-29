@@ -418,7 +418,7 @@ types:
 # CONDITION TYPE ENUM
   enum_Type:
     type: simple
-    restriction:
+    restrictions:
       base: xs:string
       enumeration:
       - metadata:

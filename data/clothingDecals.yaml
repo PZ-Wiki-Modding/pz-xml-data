@@ -35,8 +35,8 @@ types:
     type: complex
     composition: choice
     elements:
-    - info:
-        name: group
+    - name: group
+      metadata:
         type: type_clothingDecalGroup
         minOccurs: 0
         maxOccurs: unbounded
@@ -47,15 +47,15 @@ types:
     type: complex
     composition: choice
     elements:
-    - info:
-        name: name
+    - name: name
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1
       description: |-
         A unique identifier for the decal group.
-    - info:
-        name: decal
+    - name: decal
+      metadata:
         type: xs:string
         minOccurs: 0
         maxOccurs: unbounded
@@ -77,8 +77,8 @@ types:
         <decal>myDecal</decal>
         <decal>anotherDecal</decal>
         ```
-    - info:
-        name: group
+    - name: group
+      metadata:
         type: xs:string
         minOccurs: 0
         maxOccurs: unbounded

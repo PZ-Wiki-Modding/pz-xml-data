@@ -58,13 +58,13 @@ types:
     type: complex
     composition: choice
     elements:
-    - info:
-        name: m_FemaleOutfits
+    - name: m_FemaleOutfits
+      metadata:
         type: type_outfit
       description: |-
         Define an outfit with [m_FemaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-femaleoutfits) and [m_MaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-maleoutfits) respectively for the female and male characters. If one of the two is not defined, it won't spawn naturally on the other gender in the game. Both male and female outfits can (and probably should) keep the same [m_Name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-name) and [m_Guid](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-guid) values.
-    - info:
-        name: m_MaleOutfits
+    - name: m_MaleOutfits
+      metadata:
         type: type_outfit
       "#desc": type_clothing/elements/m_FemaleOutfits
   
@@ -72,54 +72,54 @@ types:
     type: complex
     composition: choice
     elements:
-    - info:
-        name: m_Name
+    - name: m_Name
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1
       description: |-
         The unique identifier for the outfit. Preferably keep it the same for the male and female variants.
-    - info:
-        name: m_Guid
+    - name: m_Guid
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1
       description: |-
         The [GUID](https://pzwiki.net/wiki/GUID) of the outfit. 
-    - info:
-        name: m_Top
+    - name: m_Top
+      metadata:
         type: xs:boolean
         minOccurs: 0
         maxOccurs: 1
       description: |-
         If set to `true`, the outfit will spawn with random pants or shirts, respectivement for the parameters [m_Pants](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-pants) and [m_Top](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-top). When those two parameters are not set, they default to `true`.
-    - info:
-        name: m_Pants
+    - name: m_Pants
+      metadata:
         type: xs:boolean
         minOccurs: 0
         maxOccurs: 1
-    - info:
-        name: m_AllowPantsHue
+    - name: m_AllowPantsHue
+      metadata:
         type: xs:boolean
         minOccurs: 0
         maxOccurs: 1
-    - info:
-        name: m_AllowTopTint
+    - name: m_AllowTopTint
+      metadata:
         type: xs:boolean
         minOccurs: 0
         maxOccurs: 1
-    - info:
-        name: m_AllowPantsTint
+    - name: m_AllowPantsTint
+      metadata:
         type: xs:boolean
         minOccurs: 0
         maxOccurs: 1
-    - info:
-        name: m_AllowTShirtDecal
+    - name: m_AllowTShirtDecal
+      metadata:
         type: xs:boolean
         minOccurs: 0
         maxOccurs: 1
-    - info:
-        name: m_items
+    - name: m_items
+      metadata:
         type: type_item
         minOccurs: 1
         maxOccurs: unbounded
@@ -129,22 +129,22 @@ types:
     type: complex
     composition: choice
     elements:
-    - info:
-        name: probability
+    - name: probability
+      metadata:
         type: xs:float
         minOccurs: 1
         maxOccurs: 1
       description: |-
         The probability of the item being selected for the outfit. Needs to be a value between 0.0 and 1.0.
-    - info:
-        name: itemGUID
+    - name: itemGUID
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1
       description: |-
         The [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the clothing item that should be part of the outfit. You can define extra outfits thanks to the [subItems](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-subitems) parameter.
-    - info:
-        name: subItems
+    - name: subItems
+      metadata:
         type: type_subItem
         minOccurs: 0
         maxOccurs: unbounded
@@ -155,8 +155,8 @@ types:
     type: complex
     composition: choice
     elements:
-    - info:
-        name: itemGUID
+    - name: itemGUID
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1

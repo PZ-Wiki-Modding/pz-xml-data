@@ -16,8 +16,8 @@ types:
     type: complex
     composition: choice
     elements:
-    - info:
-        name: m_MaleModel
+    - name: m_MaleModel
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1
@@ -43,67 +43,67 @@ types:
         The path separators can be either unix with `/` or `\\`, both are valid. Make sure to not add the extension.
 
         [m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in `media/lua/shared/NPCs/BodyLocations.lua` for the vanilla game).
-    - info:
-        name: m_FemaleModel
+    - name: m_FemaleModel
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1
       "#desc": type_clothingItem/elements/m_MaleModel
-    - info:
-        name: m_AltMaleModel
+    - name: m_AltMaleModel
+      metadata:
         type: xs:string
         minOccurs: 0
         maxOccurs: 1
       "#desc": type_clothingItem/elements/m_MaleModel
-    - info:
-        name: m_AltFemaleModel
+    - name: m_AltFemaleModel
+      metadata:
         type: xs:string
         minOccurs: 0
         maxOccurs: 1
       "#desc": type_clothingItem/elements/m_MaleModel
-    - info:
-        name: m_GUID
+    - name: m_GUID
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1
       description: |-
         The [GUID](https://pzwiki.net/wiki/GUID) of the clothing item.
-    - info:
-        name: m_Static
+    - name: m_Static
+      metadata:
         type: xs:boolean
         minOccurs: 1
         maxOccurs: 1
       description: |-
         If `true`, the clothing item won't deform with the character's body. This is used for items like backpacks or hats that should not change shape with the character's body.
-    - info:
-        name: m_AllowRandomHue
+    - name: m_AllowRandomHue
+      metadata:
         type: xs:boolean
         minOccurs: 1
         maxOccurs: 1
       description: |-
         When [m_AllowRandomHue](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomhue) or [m_AllowRandomTint](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomtint) are set to `true`, the clothing item will respectively have a random hue or tint applied to it. m_AllowRandomHue doesn't seem to be impactful on the clothing item as much as m_AllowRandomTint, which will apply the random color on white areas of the clothing item.
-    - info:
-        name: m_AllowRandomTint
+    - name: m_AllowRandomTint
+      metadata:
         type: xs:boolean
         minOccurs: 1
         maxOccurs: 1
       "#desc": type_clothingItem/elements/m_AllowRandomHue
-    - info:
-        name: m_AttachBone
+    - name: m_AttachBone
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1
       description: |-
         Specifies a bone to attach the clothing item to. Mostly notably used for hats and some arm protection items. To attach to the head, use `Bip01_Head`.
-    - info:
-        name: m_Shader
+    - name: m_Shader
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1
       description: |-
         Specifies a shader to use for the clothing item. The default shader used by clothing items is `basicEffect`. The value needs to be the filename of the shader inside the folder `media/shaders`.
-    - info:
-        name: textureChoices
+    - name: textureChoices
+      metadata:
         type: xs:string
         minOccurs: 0
         maxOccurs: unbounded
@@ -127,14 +127,14 @@ types:
         ```
 
         [m_BaseTextures](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-basetextures) is used specifically for 2D clothing items that are applied on the character's body directly (tshirts, pants, socks...). The folder structure is the same as for [textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices).
-    - info:
-        name: m_BaseTextures
+    - name: m_BaseTextures
+      metadata:
         type: xs:string
         minOccurs: 0
         maxOccurs: unbounded
       "#desc": type_clothingItem/elements/textureChoices
-    - info:
-        name: m_Masks
+    - name: m_Masks
+      metadata:
         type: xs:integer
         minOccurs: 0
         maxOccurs: unbounded
@@ -153,22 +153,22 @@ types:
         ```
 
         [m_UnderlayMasksFolder](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-underlaymasksfolder) supposedly is used to add a texture folder in which you have modified versions of these masks if you ever need to adjust the masks for your own clothing items without clashing with other mods custom masks.
-    - info:
-        name: m_MasksFolder
+    - name: m_MasksFolder
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1
       description: |-
         Default value is `media/textures/Body/Masks`. Some clothing behaviors seem to be hardcoded to this path. You can notably use it to deactivate masks by setting the value to `media/textures/Clothes/Hat/Masks`, but it will also deactivate damage (holes) and blood effects.
-    - info:
-        name: m_UnderlayMasksFolder
+    - name: m_UnderlayMasksFolder
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1
       description: |-
         Default value is `media/textures/Body/UnderlayMasks`. Some clothing behaviors seem to be hardcoded to this path.
-    - info:
-        name: m_HatCategory
+    - name: m_HatCategory
+      metadata:
         type: xs:string
         minOccurs: 1
         maxOccurs: 1
@@ -180,8 +180,8 @@ types:
         - `nohair`
 
         Then values `Group` followed by a number `01`, `02`, etc are also used.
-    - info:
-        name: m_SpawnWith
+    - name: m_SpawnWith
+      metadata:
         type: xs:string
         minOccurs: 0
         maxOccurs: unbounded
@@ -195,8 +195,8 @@ types:
         <m_SpawnWith>GUID3</m_SpawnWith>
         ...
         ```
-    - info:
-        name: m_DecalGroup
+    - name: m_DecalGroup
+      metadata:
         type: xs:string
         minOccurs: 0
         maxOccurs: 1

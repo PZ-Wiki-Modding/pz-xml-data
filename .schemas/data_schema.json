@@ -80,14 +80,14 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "info": {
+        "name": {
+          "type": "string",
+          "description": "Element name"
+        },
+        "metadata": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "name": {
-              "type": "string",
-              "description": "Element name"
-            },
             "type": {
               "oneOf": [
                 { "type": "string" },
@@ -110,7 +110,7 @@
               "description": "Maximum occurrences"
             }
           },
-          "required": ["name", "type"]
+          "required": ["type"]
         },
         "description": {
           "type": "string",
@@ -121,19 +121,20 @@
           "description": "Link to another description"
         }
       },
-      "required": ["info"]
+      "required": ["name", "metadata"]
     },
     "attributeDefinition": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "info": {
+        "name": {
+          "type": "string",
+          "description": "Attribute name"
+        },
+        "metadata": {
           "type": "object",
+          "additionalProperties": false,
           "properties": {
-            "name": {
-              "type": "string",
-              "description": "Attribute name"
-            },
             "type": {
               "type": "string",
               "description": "Attribute type"
@@ -144,7 +145,7 @@
               "description": "Whether attribute is required or optional"
             }
           },
-          "required": ["name", "type"]
+          "required": ["type"]
         },
         "description": {
           "type": "string",
@@ -155,7 +156,7 @@
           "description": "Link to another description"
         }
       },
-      "required": ["info"]
+      "required": ["name", "metadata"]
     },
     "restrictionDefinition": {
       "type": "object",
@@ -172,7 +173,7 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "info": {
+              "metadata": {
                 "type": "object",
                 "additionalProperties": false,
                 "properties": {
@@ -184,7 +185,7 @@
                 "required": ["value"]
               }
             },
-            "required": ["info"]
+            "required": ["metadata"]
           }
         }
       },

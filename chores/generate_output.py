@@ -23,7 +23,7 @@ def find_description(source: dict, code: str) -> str:
         # parse objects in this type
         for obj in type_data.get(objects, []):
             # check if the name matches
-            if obj.get('info', {}).get('name') != code_segments[2]:
+            if obj.get('name') != code_segments[2]:
                 continue
             return obj.get('description', code)
 

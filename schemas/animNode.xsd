@@ -215,18 +215,5 @@
       <xs:element/>
     </xs:all>
   </xs:complexType>
-  <xs:simpleType name="enum_Type">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value=""/>
-      <xs:enumeration value=""/>
-      <xs:enumeration value=""/>
-      <xs:enumeration value=""/>
-      <xs:enumeration value=""/>
-      <xs:enumeration value=""/>
-      <xs:enumeration value=""/>
-      <xs:enumeration value=""/>
-      <xs:enumeration value=""/>
-      <xs:enumeration value=""/>
-    </xs:restriction>
-  </xs:simpleType>
+  <xs:simpleType name="enum_Type"/>
 </xs:schema>

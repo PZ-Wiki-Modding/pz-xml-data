@@ -152,13 +152,13 @@ def create_xsd_from_yaml(schema_data: dict, output_xsd_path: Path):
     schema.set('xmlns:xs', 'http://www.w3.org/2001/XMLSchema')
     
     # Add root element
-    root_def = schema_data.get('root', {})
+    root_def = schema_data['root']
     root_elem = ET.SubElement(schema, 'xs:element')
-    root_elem.set('name', root_def.get('name', 'root'))
-    root_elem.set('type', root_def.get('type', 'RootType'))
+    root_elem.set('name', root_def['name'])
+    root_elem.set('type', root_def['type'])
     
     root_annotation = ET.SubElement(root_elem, 'xs:annotation')
-    add_documentation_with_html(root_annotation, f"Root element for {root_def.get('name', 'root')} configuration.")
+    add_documentation_with_html(root_annotation, f"Root element for {root_def['name']} configuration.")
     
     # Collect all union types first
     union_types = {}
@@ -180,7 +180,7 @@ def create_xsd_from_yaml(schema_data: dict, output_xsd_path: Path):
             return
         elements = type_def.get('elements', [])
         for elem_def in elements:
-            attrs = elem_def.get('info', {})
+            attrs = elem_def.get('metadata', {})
             elem_type = attrs.get('type')
             if isinstance(elem_type, list):
                 get_or_create_union_type(elem_type)
@@ -188,7 +188,7 @@ def create_xsd_from_yaml(schema_data: dict, output_xsd_path: Path):
         # Also scan attributes
         attrs_list = type_def.get('attributes', [])
         for attr_def in attrs_list:
-            attrs = attr_def.get('info', {})
+            attrs = attr_def.get('metadata', {})
             attr_type = attrs.get('type')
             if isinstance(attr_type, list):
                 get_or_create_union_type(attr_type)
@@ -218,7 +218,7 @@ def create_xsd_from_yaml(schema_data: dict, output_xsd_path: Path):
             simple_type.set('name', type_name)
             
             # Add restriction
-            restriction = type_def.get('restriction', {})
+            restriction = type_def.get('restrictions', {})
             if restriction:
                 restriction_elem = ET.SubElement(simple_type, 'xs:restriction')
                 restriction_elem.set('base', restriction.get('base', 'xs:string'))
@@ -226,9 +226,9 @@ def create_xsd_from_yaml(schema_data: dict, output_xsd_path: Path):
                 # Add enumeration values
                 enumerations = restriction.get('enumeration', [])
                 for enum_def in enumerations:
-                    enum_info = enum_def.get('info', {})
+                    enum_metadata = enum_def.get('metadata', {})
                     enum_elem = ET.SubElement(restriction_elem, 'xs:enumeration')
-                    enum_elem.set('value', str(enum_info.get('value', '')))
+                    enum_elem.set('value', str(enum_metadata.get('value', '')))
                     
                     # Add documentation
                     if 'description' in enum_def:
@@ -252,8 +252,9 @@ def create_xsd_from_yaml(schema_data: dict, output_xsd_path: Path):
                     container_elem.set('maxOccurs', 'unbounded')
                     
                     for elem_def in elements:
-                        attrs = elem_def.get('info', {})
+                        attrs = elem_def.get('metadata', {})
                         elem = ET.SubElement(container_elem, 'xs:element')
+                        elem.set('name', elem_def['name'])
                         
                         # Handle type - check if it's a union (list)
                         elem_type = attrs.get('type')
@@ -273,8 +274,9 @@ def create_xsd_from_yaml(schema_data: dict, output_xsd_path: Path):
                     all_elem = ET.SubElement(complex_type, 'xs:all')
                     
                     for elem_def in elements:
-                        attrs = elem_def.get('info', {})
+                        attrs = elem_def.get('metadata', {})
                         elem = ET.SubElement(all_elem, 'xs:element')
+                        elem.set('name', elem_def['name'])
                         
                         # Handle type - check if it's a union (list)
                         elem_type = attrs.get('type')
@@ -293,9 +295,9 @@ def create_xsd_from_yaml(schema_data: dict, output_xsd_path: Path):
             # Add attributes
             attrs_list = type_def.get('attributes', [])
             for attr_def in attrs_list:
-                attrs = attr_def.get('info', {})
+                attrs = attr_def.get('metadata', {})
                 attr = ET.SubElement(complex_type, 'xs:attribute')
-                attr.set('name', attrs.get('name', 'attribute'))
+                attr.set('name', attr_def['name'])
                 
                 # Handle type - check if it's a union (list)
                 attr_type = attrs.get('type')

@@ -9,7 +9,7 @@
   </xs:element>
   <xs:complexType name="type_clothingDecals">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element>
+      <xs:element name="group" type="type_clothingDecalGroup" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Defines a decal group, that is a collection of decals associated to a name for referencing.</p>
@@ -20,21 +20,21 @@
   </xs:complexType>
   <xs:complexType name="type_clothingDecalGroup">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element>
+      <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>A unique identifier for the decal group.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element>
+      <xs:element name="decal" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Refers to a texture file stored inside the folder <code>media/textures/shirtdecals/</code>. The value needs to be the name of the file without the extension (which needs to be <code>.png</code>). Alternatively, it seems the game also accepts decals inside texture packs.</p><p>For example, for the following file structure:</p><pre><code>📁 MyMod</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 textures</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 shirtdecals</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 myDecal.png</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 anotherDecal.png</code></pre><p>The decal parameter should have this following syntax:</p><pre><code>&amp;lt;decal&amp;gt;myDecal&amp;lt;/decal&amp;gt;</code></pre><pre><code>&amp;lt;decal&amp;gt;anotherDecal&amp;lt;/decal&amp;gt;</code></pre>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element>
+      <xs:element name="group" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Refers to another [group](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#group). This allows that group to use decals of the referenced group.</p>

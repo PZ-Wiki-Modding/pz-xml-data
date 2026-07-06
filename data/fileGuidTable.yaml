@@ -1,0 +1,82 @@
+# yaml-language-server: $schema: ../.schemas/data_schema.json
+
+description: |-
+  Associate [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) files to a GUID for access in the [clothing](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html) file. Whenever you want to use vanilla clothing in your clothing.xml file, you have to redefine them in your own mod's fileGuidTable.xml file, otherwise the game will not recognize them.
+
+  An example file would look like this:
+  ```xml
+  <?xml version="1.0" encoding="utf-8"?>
+  <fileGuidTable>
+    <files>
+      <path>media/clothing/clothingItems/MyClothingItem.xml</path>
+      <guid>YOUR_RANDOM_CLOTHING_ITEM_GUID_HERE</guid>
+    </files>
+    <files>
+      <path>media/clothing/clothingItems/MyOtherClothingItem.xml</path>
+      <guid>YOUR_OTHER_RANDOM_CLOTHING_ITEM_GUID_HERE</guid>
+    </files>
+  </fileGuidTable>
+  ```
+patterns:
+  - '**/media/fileGuidTable.xml'
+root:
+  name: fileGuidTable
+  type: type_fileGuidTable
+types:
+  type_fileGuidTable:
+    type: complex
+    composition: choice
+    elements:
+    - name: files
+      metadata:
+        type: type_fileGuidTable_files
+        minOccurs: 0
+        maxOccurs: unbounded
+      description: |-
+        Define a [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) file and GUID association.
+
+        For example for a clothingItem with the following file structure:
+        ```
+        📁 media
+          📁 clothing
+            📁 clothingItems
+              📄 MyClothingItem.xml
+        ```
+
+        You should have the following parameters:
+        ```xml
+        <files>
+          <path>media/clothing/clothingItems/MyClothingItem.xml</path>
+          <guid>YOUR_RANDOM_CLOTHING_ITEM_GUID_HERE</guid>
+        </files>
+        ```
+  type_fileGuidTable_files:
+    type: complex
+    composition: sequence
+    elements:
+      - name: path
+        metadata:
+          type: xs:string
+          minOccurs: 1
+          maxOccurs: 1
+        description: |-
+          The path to the [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) file. This path is relative to the upper folder of `media`, for example for the following structure:
+          ```
+          📁 MyMod
+            📁 media
+              📁 clothing
+                📁 clothingItems
+                  📄 MyClothingItem.xml
+          ```
+
+          You need the following parameter:
+          ```xml
+          <path>media/clothing/clothingItems/MyClothingItem.xml</path>
+          ```
+      - name: guid
+        metadata:
+          type: xs:string
+          minOccurs: 1
+          maxOccurs: 1
+        description: |-
+          The [GUID](https://pzwiki.net/wiki/GUID) of the clothing item. This needs to be the same as the one inside the [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) file for the clothing item to be recognized by the game.

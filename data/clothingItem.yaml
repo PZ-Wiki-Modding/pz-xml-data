@@ -28,11 +28,10 @@ types:
 
         For example, for the following file structure:
         ```
-        📁 MyMod
-          📁 media
-            📁 models_X
-              📁 MyAwesomeClothing
-                📄 myClothing.fbx
+        📁 media
+          📁 models_X
+            📁 MyAwesomeClothing
+              📄 myClothing.fbx
         ```
         
         These parameters should have this following syntax:
@@ -67,7 +66,7 @@ types:
         minOccurs: 1
         maxOccurs: 1
       description: |-
-        The [GUID](https://pzwiki.net/wiki/GUID) of the clothing item.
+        The [GUID](https://pzwiki.net/wiki/GUID) of the clothing item. This needs to be the same as the one inside the [fileGuidTable](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/fileGuidTable.html#guid) file for the clothing item to be recognized by the game.
     - name: m_Static
       metadata:
         type: xs:boolean
@@ -112,12 +111,11 @@ types:
 
         For example, for the following file structure:
         ```
-        📁 MyMod
-          📁 media
-            📁 textures
-              📁 CoolMod
-                📄 texture1.png
-                📄 texture2.png
+        📁 media
+          📁 textures
+            📁 CoolMod
+              📄 texture1.png
+              📄 texture2.png
         ```
 
         You'd have:

@@ -44,35 +44,35 @@
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_Static" type="xs:boolean" minOccurs="1" maxOccurs="1">
+      <xs:element name="m_Static" type="xs:boolean" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>If <code>true</code>, the clothing item won't deform with the character's body. This is used for items like backpacks or hats that should not change shape with the character's body.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_AllowRandomHue" type="xs:boolean" minOccurs="1" maxOccurs="1">
+      <xs:element name="m_AllowRandomHue" type="xs:boolean" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>When [m_AllowRandomHue](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomhue) or [m_AllowRandomTint](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomtint) are set to <code>true</code>, the clothing item will respectively have a random hue or tint applied to it. m_AllowRandomHue doesn't seem to be impactful on the clothing item as much as m_AllowRandomTint, which will apply the random color on white areas of the clothing item.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_AllowRandomTint" type="xs:boolean" minOccurs="1" maxOccurs="1">
+      <xs:element name="m_AllowRandomTint" type="xs:boolean" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>When [m_AllowRandomHue](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomhue) or [m_AllowRandomTint](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomtint) are set to <code>true</code>, the clothing item will respectively have a random hue or tint applied to it. m_AllowRandomHue doesn't seem to be impactful on the clothing item as much as m_AllowRandomTint, which will apply the random color on white areas of the clothing item.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_AttachBone" type="xs:string" minOccurs="1" maxOccurs="1">
+      <xs:element name="m_AttachBone" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Specifies a bone to attach the clothing item to. Mostly notably used for hats and some arm protection items. To attach to the head, use <code>Bip01_Head</code>.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_Shader" type="xs:string" minOccurs="1" maxOccurs="1">
+      <xs:element name="m_Shader" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Specifies a shader to use for the clothing item. The default shader used by clothing items is <code>basicEffect</code>. The value needs to be the filename of the shader inside the folder <code>media/shaders</code>.</p>
@@ -115,21 +115,21 @@
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_MasksFolder" type="xs:string" minOccurs="1" maxOccurs="1">
+      <xs:element name="m_MasksFolder" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Default value is <code>media/textures/Body/Masks</code>. Some clothing behaviors seem to be hardcoded to this path. You can notably use it to deactivate masks by setting the value to <code>media/textures/Clothes/Hat/Masks</code>, but it will also deactivate damage (holes) and blood effects.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_UnderlayMasksFolder" type="xs:string" minOccurs="1" maxOccurs="1">
+      <xs:element name="m_UnderlayMasksFolder" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Default value is <code>media/textures/Body/UnderlayMasks</code>. Some clothing behaviors seem to be hardcoded to this path.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_HatCategory" type="xs:string" minOccurs="1" maxOccurs="1">
+      <xs:element name="m_HatCategory" type="xs:string" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Seems to be used to specify if a hat will hide the hair and beard. Notable values are:

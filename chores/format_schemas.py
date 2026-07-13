@@ -234,6 +234,8 @@ def create_xsd_from_yaml(schema_data: dict, output_xsd_path: Path):
                     if 'description' in enum_def:
                         annotation = ET.SubElement(enum_elem, 'xs:annotation')
                         add_documentation_with_html(annotation, enum_def.get('description', ''))
+                
+                # min max restrictions
                 min = restriction.get('minimum')
                 max = restriction.get('maximum')
                 if min is not None or max is not None:

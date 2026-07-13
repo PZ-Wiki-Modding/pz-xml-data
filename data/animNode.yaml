@@ -308,7 +308,7 @@ types:
         minOccurs: 0
     - name: m_Type
       metadata:
-        type: enum_Type
+        type: rule_Type
         minOccurs: 0
     - name: m_Condition
       metadata:
@@ -355,14 +355,14 @@ types:
         The name of the event to trigger. This can be a custom name but there's also available events that will trigger specific actions. You can find a list of available events [here](https://pzwiki.net/wiki/Events#Available_events).
     - name: m_Time
       metadata:
-        type: xs:string
+        type: rule_Time
         minOccurs: 0
         maxOccurs: 1
       description: |-
         The moment during the animation when the event will be triggered. This can be set to Start or End. 
     - name: m_TimePc
       metadata:
-        type: xs:float
+        type: rule_TimePc
         minOccurs: 0
         maxOccurs: 1
       description: |-
@@ -441,7 +441,7 @@ types:
 
 
 # CONDITION TYPE ENUM
-  enum_Type:
+  rule_Type:
     type: simple
     restrictions:
       base: xs:string
@@ -466,3 +466,20 @@ types:
           value: "GTR"
       - metadata:
           value: "LESS"
+    
+  rule_Time:
+    type: simple
+    restrictions:
+      base: xs:string
+      enumeration:
+      - metadata:
+          value: "Start"
+      - metadata:
+          value: "End"
+
+  rule_TimePc:
+    type: simple
+    restrictions:
+      base: xs:float
+      minimum: 0
+      maximum: 1

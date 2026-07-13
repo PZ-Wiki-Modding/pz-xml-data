@@ -188,6 +188,14 @@
             },
             "required": ["metadata"]
           }
+        },
+        "minimum": {
+          "type": "number",
+          "description": "Minimum value for numeric types"
+        },
+        "maximum": {
+          "type": "number",
+          "description": "Maximum value for numeric types"
         }
       },
       "required": ["base"]

@@ -234,6 +234,16 @@ def create_xsd_from_yaml(schema_data: dict, output_xsd_path: Path):
                     if 'description' in enum_def:
                         annotation = ET.SubElement(enum_elem, 'xs:annotation')
                         add_documentation_with_html(annotation, enum_def.get('description', ''))
+                min = restriction.get('minimum')
+                max = restriction.get('maximum')
+                if min is not None or max is not None:
+                    # Add min/max restrictions for numeric types
+                    if min is not None:
+                        min_elem = ET.SubElement(restriction_elem, 'xs:minInclusive')
+                        min_elem.set('value', str(min))
+                    if max is not None:
+                        max_elem = ET.SubElement(restriction_elem, 'xs:maxInclusive')
+                        max_elem.set('value', str(max))
         elif type_kind == 'complex':
             # Handle complex types
             complex_type = ET.SubElement(schema, 'xs:complexType')

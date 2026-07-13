@@ -77,6 +77,13 @@ types:
         type: xs:string
         minOccurs: 0
         maxOccurs: 1
+    - name: m_Finished
+      metadata:
+        type: xs:string
+        minOccurs: 0
+        maxOccurs: 1
+      description: |-
+        Looks unused.
     - name: m_Looped
       metadata:
         type: xs:boolean
@@ -308,6 +315,22 @@ types:
         type: xs:string
         minOccurs: 0
     - name: m_Value
+      metadata:
+        type: xs:string
+        minOccurs: 0
+    - name: m_IntValue
+      metadata:
+        type: xs:integer
+        minOccurs: 0
+    - name: m_FloatValue
+      metadata:
+        type: xs:float
+        minOccurs: 0
+    - name: m_BoolValue
+      metadata:
+        type: xs:boolean
+        minOccurs: 0
+    - name: m_StringValue
       metadata:
         type: xs:string
         minOccurs: 0

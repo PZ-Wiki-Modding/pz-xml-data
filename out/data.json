@@ -497,7 +497,7 @@
           {
             "name": "m_Type",
             "metadata": {
-              "type": "enum_Type",
+              "type": "rule_Type",
               "minOccurs": 0
             }
           },
@@ -570,7 +570,7 @@
           {
             "name": "m_Time",
             "metadata": {
-              "type": "xs:string",
+              "type": "rule_Time",
               "minOccurs": 0,
               "maxOccurs": 1
             },
@@ -579,7 +579,7 @@
           {
             "name": "m_TimePc",
             "metadata": {
-              "type": "xs:float",
+              "type": "rule_TimePc",
               "minOccurs": 0,
               "maxOccurs": 1
             },
@@ -690,7 +690,7 @@
           }
         ]
       },
-      "enum_Type": {
+      "rule_Type": {
         "type": "simple",
         "restrictions": {
           "base": "xs:string",
@@ -746,6 +746,32 @@
               }
             }
           ]
+        }
+      },
+      "rule_Time": {
+        "type": "simple",
+        "restrictions": {
+          "base": "xs:string",
+          "enumeration": [
+            {
+              "metadata": {
+                "value": "Start"
+              }
+            },
+            {
+              "metadata": {
+                "value": "End"
+              }
+            }
+          ]
+        }
+      },
+      "rule_TimePc": {
+        "type": "simple",
+        "restrictions": {
+          "base": "xs:float",
+          "minimum": 0,
+          "maximum": 1
         }
       }
     }

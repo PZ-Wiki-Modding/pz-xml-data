@@ -151,7 +151,7 @@
   <xs:complexType name="type_Condition">
     <xs:all>
       <xs:element name="m_Name" type="xs:string" minOccurs="0"/>
-      <xs:element name="m_Type" type="enum_Type" minOccurs="0"/>
+      <xs:element name="m_Type" type="rule_Type" minOccurs="0"/>
       <xs:element name="m_Condition" type="xs:string" minOccurs="0"/>
       <xs:element name="m_Value" type="xs:string" minOccurs="0"/>
       <xs:element name="m_IntValue" type="xs:integer" minOccurs="0"/>
@@ -176,14 +176,14 @@
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_Time" type="xs:string" minOccurs="0" maxOccurs="1">
+      <xs:element name="m_Time" type="rule_Time" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The moment during the animation when the event will be triggered. This can be set to Start or End.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="m_TimePc" type="xs:float" minOccurs="0" maxOccurs="1">
+      <xs:element name="m_TimePc" type="rule_TimePc" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The moment during the animation when the event will be triggered. This uses a normalized time, so <code>0</code> is the start and <code>1</code> is the end. In comparison to <code>m_Time</code>, this allows for more precision of when to trigger the event.</p>
@@ -229,7 +229,7 @@
       <xs:element name="weight" type="xs:float" minOccurs="0" maxOccurs="1"/>
     </xs:all>
   </xs:complexType>
-  <xs:simpleType name="enum_Type">
+  <xs:simpleType name="rule_Type">
     <xs:restriction base="xs:string">
       <xs:enumeration value="STRING"/>
       <xs:enumeration value="BOOL"/>
@@ -241,6 +241,18 @@
       <xs:enumeration value="STRNEQ"/>
       <xs:enumeration value="GTR"/>
       <xs:enumeration value="LESS"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="rule_Time">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Start"/>
+      <xs:enumeration value="End"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="rule_TimePc">
+    <xs:restriction base="xs:float">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="1"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

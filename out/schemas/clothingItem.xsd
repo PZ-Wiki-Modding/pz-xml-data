@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="clothingItem" type="type_clothingItem">
+    <xs:annotation>
+      <xs:documentation><![CDATA[
+        <p>Root element for clothingItem configuration.</p>
+        ]]></xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="type_clothingItem">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="m_MaleModel" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters <strong>should</strong> be left empty when the clothing item is a body texture.</p><p>The model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in <code>media/models_X</code> and accessed relative to it.</p><p>For example, for the following file structure:</p><pre><code>📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 models_X</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 MyAwesomeClothing</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 myClothing.fbx</code></pre><p>These parameters should have this following syntax:</p><pre><code>&amp;lt;m_MaleModel&amp;gt;MyAwesomeClothing/myClothing&amp;lt;/m_MaleModel&amp;gt;</code></pre><p>The path separators can be either unix with <code>/</code> or <code>\\</code>, both are valid. Make sure to not add the extension.</p><p>[m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in <code>media/lua/shared/NPCs/BodyLocations.lua</code> for the vanilla game).</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_FemaleModel" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters <strong>should</strong> be left empty when the clothing item is a body texture.</p><p>The model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in <code>media/models_X</code> and accessed relative to it.</p><p>For example, for the following file structure:</p><pre><code>📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 models_X</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 MyAwesomeClothing</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 myClothing.fbx</code></pre><p>These parameters should have this following syntax:</p><pre><code>&amp;lt;m_MaleModel&amp;gt;MyAwesomeClothing/myClothing&amp;lt;/m_MaleModel&amp;gt;</code></pre><p>The path separators can be either unix with <code>/</code> or <code>\\</code>, both are valid. Make sure to not add the extension.</p><p>[m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in <code>media/lua/shared/NPCs/BodyLocations.lua</code> for the vanilla game).</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_AltMaleModel" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters <strong>should</strong> be left empty when the clothing item is a body texture.</p><p>The model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in <code>media/models_X</code> and accessed relative to it.</p><p>For example, for the following file structure:</p><pre><code>📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 models_X</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 MyAwesomeClothing</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 myClothing.fbx</code></pre><p>These parameters should have this following syntax:</p><pre><code>&amp;lt;m_MaleModel&amp;gt;MyAwesomeClothing/myClothing&amp;lt;/m_MaleModel&amp;gt;</code></pre><p>The path separators can be either unix with <code>/</code> or <code>\\</code>, both are valid. Make sure to not add the extension.</p><p>[m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in <code>media/lua/shared/NPCs/BodyLocations.lua</code> for the vanilla game).</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_AltFemaleModel" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters <strong>should</strong> be left empty when the clothing item is a body texture.</p><p>The model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in <code>media/models_X</code> and accessed relative to it.</p><p>For example, for the following file structure:</p><pre><code>📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 models_X</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 MyAwesomeClothing</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 myClothing.fbx</code></pre><p>These parameters should have this following syntax:</p><pre><code>&amp;lt;m_MaleModel&amp;gt;MyAwesomeClothing/myClothing&amp;lt;/m_MaleModel&amp;gt;</code></pre><p>The path separators can be either unix with <code>/</code> or <code>\\</code>, both are valid. Make sure to not add the extension.</p><p>[m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in <code>media/lua/shared/NPCs/BodyLocations.lua</code> for the vanilla game).</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_GUID" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>The [GUID](https://pzwiki.net/wiki/GUID) of the clothing item. This needs to be the same as the one inside the [fileGuidTable](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/fileGuidTable.html#guid) file for the clothing item to be recognized by the game.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_Static" type="xs:boolean" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>If <code>true</code>, the clothing item won't deform with the character's body. This is used for items like backpacks or hats that should not change shape with the character's body.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_AllowRandomHue" type="xs:boolean" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>When [m_AllowRandomHue](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomhue) or [m_AllowRandomTint](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomtint) are set to <code>true</code>, the clothing item will respectively have a random hue or tint applied to it. m_AllowRandomHue doesn't seem to be impactful on the clothing item as much as m_AllowRandomTint, which will apply the random color on white areas of the clothing item.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_AllowRandomTint" type="xs:boolean" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>When [m_AllowRandomHue](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomhue) or [m_AllowRandomTint](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomtint) are set to <code>true</code>, the clothing item will respectively have a random hue or tint applied to it. m_AllowRandomHue doesn't seem to be impactful on the clothing item as much as m_AllowRandomTint, which will apply the random color on white areas of the clothing item.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_AttachBone" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>Specifies a bone to attach the clothing item to. Mostly notably used for hats and some arm protection items. To attach to the head, use <code>Bip01_Head</code>.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_Shader" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>Specifies a shader to use for the clothing item. The default shader used by clothing items is <code>basicEffect</code>. The value needs to be the filename of the shader inside the folder <code>media/shaders</code>.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="textureChoices" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>[textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices) sets the texture used by the clothing item. Many of those can be provided as random choices for the clothing item. The textures need to be stored in the folder <code>media/textures</code>.</p><p>For example, for the following file structure:</p><pre><code>📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 textures</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 CoolMod</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 texture1.png</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 texture2.png</code></pre><p>You'd have:
+``<code>xml
+&amp;lt;textureChoices&amp;gt;CoolMod/texture1&amp;lt;/textureChoices&amp;gt;
+&amp;lt;textureChoices&amp;gt;CoolMod/texture2&amp;lt;/textureChoices&amp;gt;
+</code>``</p><p>[m_BaseTextures](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-basetextures) is used specifically for 2D clothing items that are applied on the character's body directly (tshirts, pants, socks...). The folder structure is the same as for [textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices).</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_BaseTextures" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>[textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices) sets the texture used by the clothing item. Many of those can be provided as random choices for the clothing item. The textures need to be stored in the folder <code>media/textures</code>.</p><p>For example, for the following file structure:</p><pre><code>📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 textures</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 CoolMod</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 texture1.png</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 texture2.png</code></pre><p>You'd have:
+``<code>xml
+&amp;lt;textureChoices&amp;gt;CoolMod/texture1&amp;lt;/textureChoices&amp;gt;
+&amp;lt;textureChoices&amp;gt;CoolMod/texture2&amp;lt;/textureChoices&amp;gt;
+</code>``</p><p>[m_BaseTextures](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-basetextures) is used specifically for 2D clothing items that are applied on the character's body directly (tshirts, pants, socks...). The folder structure is the same as for [textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices).</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_Masks" type="xs:integer" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>[m_Masks](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-masks) when set to a specific integer value will hide specific elements of the character's body model. This is notably used to remove clipping with body parts that are hidden by the clothing item. For example, a jacket will hide the torso and arms, so to reduce risks of clipping you may want to hide these.</p><p>You can find a list of the values and their corresponding body parts in the Project Zomboid Modding Archives [here](https://github.com/PZ-Wiki-Modding/Archive.Project-Zomboid-Modding/blob/main/Clothing/Masks/Mask.png).</p><p>You can insert as many of these as you want, for example:
+``<code>xml
+&amp;lt;m_Masks&amp;gt;12&amp;lt;/m_Masks&amp;gt;
+&amp;lt;m_Masks&amp;gt;13&amp;lt;/m_Masks&amp;gt;
+&amp;lt;m_Masks&amp;gt;14&amp;lt;/m_Masks&amp;gt;
+&amp;lt;m_Masks&amp;gt;3&amp;lt;/m_Masks&amp;gt;
+&amp;lt;m_Masks&amp;gt;5&amp;lt;/m_Masks&amp;gt;
+</code>``</p><p>[m_UnderlayMasksFolder](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-underlaymasksfolder) supposedly is used to add a texture folder in which you have modified versions of these masks if you ever need to adjust the masks for your own clothing items without clashing with other mods custom masks.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_MasksFolder" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>Default value is <code>media/textures/Body/Masks</code>. Some clothing behaviors seem to be hardcoded to this path. You can notably use it to deactivate masks by setting the value to <code>media/textures/Clothes/Hat/Masks</code>, but it will also deactivate damage (holes) and blood effects.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_UnderlayMasksFolder" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>Default value is <code>media/textures/Body/UnderlayMasks</code>. Some clothing behaviors seem to be hardcoded to this path.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_HatCategory" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>Seems to be used to specify if a hat will hide the hair and beard. Notable values are:
+<ul>
+<li><code>default</code></li>
+<li><code>nohairnobeard</code></li>
+<li><code>nobeard</code></li>
+<li><code>nohair</code></li></p><p></ul>
+Then values <code>Group</code> followed by a number <code>01</code>, <code>02</code>, etc are also used.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_SpawnWith" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>Link to other items that this clothingItem should spawn with. This is for example used to make left and right elbow pads spawn together. The value needs to be the [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the other clothing item.</p><p>To add multiple items, you can add multiple <code>&amp;lt;m_SpawnWith&amp;gt;</code> elements:
+``<code>xml
+&amp;lt;m_SpawnWith&amp;gt;GUID1&amp;lt;/m_SpawnWith&amp;gt;
+&amp;lt;m_SpawnWith&amp;gt;GUID2&amp;lt;/m_SpawnWith&amp;gt;
+&amp;lt;m_SpawnWith&amp;gt;GUID3&amp;lt;/m_SpawnWith&amp;gt;
+...
+</code>``</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="m_DecalGroup" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>Refers to the [name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#name) parameter of a decal group defined in the [clothingDecals.xml](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html) file. The clothing decals are used to add additional textures on top of the clothing item. This is most notably used to add logos on t-shirts, and it is possible to add multiple logos on a single decal group.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+</xs:schema>

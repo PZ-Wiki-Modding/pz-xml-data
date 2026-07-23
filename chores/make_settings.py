@@ -6,7 +6,7 @@ output_path = repo_root / 'out' / 'data.json'
 
 setting_path = repo_root / 'out' / 'settings.json'
 
-base_link = r"https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/schemas/"
+base_link = r"https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/out/schemas/"
 
 with open(output_path, 'r') as f:
     data = json.load(f)

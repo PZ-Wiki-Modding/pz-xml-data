@@ -7,6 +7,9 @@
         ]]></xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:simpleType name="union_1">
+    <xs:union memberTypes="xs:float xs:string"/>
+  </xs:simpleType>
   <xs:complexType name="type_AnimNode">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="m_Name" type="xs:string" minOccurs="1" maxOccurs="1">

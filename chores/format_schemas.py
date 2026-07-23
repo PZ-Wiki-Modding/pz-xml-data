@@ -370,6 +370,9 @@ if __name__ == '__main__':
         data = json.load(f)
 
     for xml_name, xml_data in data.items():
-        xsd_file = repo_root / 'schemas' / f"{xml_name}.xsd"
+        xsd_file = repo_root / 'out' / 'schemas' / f"{xml_name}.xsd"
+        create_xsd_from_yaml(xml_data, xsd_file)
 
+        # deprecated file path, kept for backward compatibility
+        xsd_file = repo_root / 'schemas' / f"{xml_name}.xsd"
         create_xsd_from_yaml(xml_data, xsd_file)

@@ -2,23 +2,23 @@
   "xml.fileAssociations": [
     {
       "pattern": "**/media/fileGuidTable.xml",
-      "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/schemas/fileGuidTable.xsd"
+      "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/out/schemas/fileGuidTable.xsd"
     },
     {
       "pattern": "**/clothing/clothingDecals.xml",
-      "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/schemas/clothingDecals.xsd"
+      "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/out/schemas/clothingDecals.xsd"
     },
     {
       "pattern": "**/AnimSets/**/*.xml",
-      "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/schemas/animNode.xsd"
+      "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/out/schemas/animNode.xsd"
     },
     {
       "pattern": "**/clothing/clothing.xml",
-      "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/schemas/clothing.xsd"
+      "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/out/schemas/clothing.xsd"
     },
     {
       "pattern": "**/clothing/clothingItems/**/*.xml",
-      "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/schemas/clothingItem.xsd"
+      "systemId": "https://raw.githubusercontent.com/PZ-Wiki-Modding/pz-xml-data/refs/heads/main/out/schemas/clothingItem.xsd"
     }
   ]
 }

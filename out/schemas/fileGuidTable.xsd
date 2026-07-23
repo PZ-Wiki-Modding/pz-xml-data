@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="fileGuidTable" type="type_fileGuidTable">
+    <xs:annotation>
+      <xs:documentation><![CDATA[
+        <p>Root element for fileGuidTable configuration.</p>
+        ]]></xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="type_fileGuidTable">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="files" type="type_fileGuidTable_files" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>Define a [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) file and GUID association.</p><p>For example for a clothingItem with the following file structure:</p><pre><code>📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 clothing</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 clothingItems</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 MyClothingItem.xml</code></pre><p>You should have the following parameters:
+``<code>xml
+&amp;lt;files&amp;gt;
+  &amp;lt;path&amp;gt;media/clothing/clothingItems/MyClothingItem.xml&amp;lt;/path&amp;gt;
+  &amp;lt;guid&amp;gt;YOUR_RANDOM_CLOTHING_ITEM_GUID_HERE&amp;lt;/guid&amp;gt;
+&amp;lt;/files&amp;gt;
+</code>``</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="type_fileGuidTable_files">
+    <xs:all>
+      <xs:element name="path" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>The path to the [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) file. This path is relative to the upper folder of <code>media</code>, for example for the following structure:</p><pre><code>📁 MyMod</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 clothing</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 clothingItems</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 MyClothingItem.xml</code></pre><p>You need the following parameter:
+``<code>xml
+&amp;lt;path&amp;gt;media/clothing/clothingItems/MyClothingItem.xml&amp;lt;/path&amp;gt;
+</code>``</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="guid" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>The [GUID](https://pzwiki.net/wiki/GUID) of the clothing item. This needs to be the same as the one inside the [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) file for the clothing item to be recognized by the game.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+</xs:schema>

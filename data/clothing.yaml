@@ -46,6 +46,8 @@ description: |-
     </m_MaleOutfits>
   </outfitManager>
   ```
+
+  Due to all the GUID work between the clothing.xml, fileGuidTable.xml and clothingItem.xml files, it can be easy to get lost. [Outfit XML Convereter](https://pzwiki.net/wiki/Outfit_XML_Converter) can help you with the process.
 patterns:
   - '**/clothing/clothing.xml'
 root:
@@ -151,7 +153,7 @@ types:
         minOccurs: 0
         maxOccurs: unbounded
       description: |-
-        Define a sub-item for a specific clothing item used in the outfit, so other items can also be picked.
+        Define a sub-item for a specific clothing item used in the outfit, so other items can also be picked. Any sub-item can be added as variant choices.
   
   type_subItem:
     type: complex

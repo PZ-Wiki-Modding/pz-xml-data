@@ -75,7 +75,7 @@
       <xs:element name="subItems" type="type_subItem" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation><![CDATA[
-        <p>Define a sub-item for a specific clothing item used in the outfit, so other items can also be picked.</p>
+        <p>Define a sub-item for a specific clothing item used in the outfit, so other items can also be picked. Any sub-item can be added as variant choices.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>

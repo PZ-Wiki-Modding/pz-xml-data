@@ -422,6 +422,11 @@ types:
         type: type_Condition
         minOccurs: 0
         maxOccurs: unbounded
+    - name: m_EarlyTransitionOut
+      metadata:
+        type: xs:boolean
+        minOccurs: 0
+        maxOccurs: 1
 
 # SUB STATE BONE WEIGHTS TYPE
   type_SubStateBoneWeights:

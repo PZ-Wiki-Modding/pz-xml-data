@@ -214,6 +214,7 @@
         </xs:annotation>
       </xs:element>
       <xs:element name="m_AnimName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="m_BlendTime" type="xs:float" minOccurs="0" maxOccurs="1"/>
       <xs:element name="m_blendInTime" type="xs:float" minOccurs="0" maxOccurs="1"/>
       <xs:element name="m_blendOutTime" type="xs:float" minOccurs="0" maxOccurs="1"/>
       <xs:element name="m_speedScale" type="xs:float" minOccurs="0" maxOccurs="1"/>

@@ -218,6 +218,7 @@
       <xs:element name="m_blendOutTime" type="xs:float" minOccurs="0" maxOccurs="1"/>
       <xs:element name="m_speedScale" type="xs:float" minOccurs="0" maxOccurs="1"/>
       <xs:element name="m_Conditions" type="type_Condition" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="m_EarlyTransitionOut" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
     </xs:choice>
   </xs:complexType>
   <xs:complexType name="type_SubStateBoneWeights">

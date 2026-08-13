@@ -235,6 +235,11 @@ types:
         type: xs:float
         minOccurs: 0
         maxOccurs: 1
+    - name: m_useDeferredMovement
+      metadata:
+        type: xs:boolean
+        minOccurs: 0
+        maxOccurs: 1
     attributes:
     - name: x_extends
       metadata:

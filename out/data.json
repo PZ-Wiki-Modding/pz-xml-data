@@ -101,6 +101,15 @@
             "description": "Defines how quickly the animation will begin to play, and how the game interpolates moving the armature's bones from one animNode to another. "
           },
           {
+            "name": "m_blendInTime",
+            "metadata": {
+              "type": "xs:float",
+              "minOccurs": 0,
+              "maxOccurs": 1
+            },
+            "description": "Defines how quickly the animation will begin to play, and how the game interpolates moving the armature's bones from one animState to another. It is used to create a smooth transition when the animation is started or changed."
+          },
+          {
             "name": "m_BlendOutTime",
             "metadata": {
               "type": "xs:float",
@@ -402,6 +411,14 @@
             "metadata": {
               "type": "xs:float",
               "minOccurs": 0
+            }
+          },
+          {
+            "name": "m_SubStateBoneWeights",
+            "metadata": {
+              "type": "type_SubStateBoneWeights",
+              "minOccurs": 0,
+              "maxOccurs": "unbounded"
             }
           }
         ],

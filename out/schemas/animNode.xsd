@@ -36,6 +36,13 @@
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name="m_blendInTime" type="xs:float" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation><![CDATA[
+        <p>Defines how quickly the animation will begin to play, and how the game interpolates moving the armature's bones from one animState to another. It is used to create a smooth transition when the animation is started or changed.</p>
+        ]]></xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name="m_BlendOutTime" type="xs:float" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation><![CDATA[
@@ -139,6 +146,7 @@
       <xs:element name="m_XPos" type="xs:float" minOccurs="0"/>
       <xs:element name="m_YPos" type="xs:float" minOccurs="0"/>
       <xs:element name="m_SpeedScale" type="xs:float" minOccurs="0"/>
+      <xs:element name="m_SubStateBoneWeights" type="type_SubStateBoneWeights" minOccurs="0" maxOccurs="unbounded"/>
     </xs:all>
     <xs:attribute name="referenceID" type="xs:integer" use="optional"/>
   </xs:complexType>

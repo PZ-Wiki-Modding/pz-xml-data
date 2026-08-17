@@ -48,7 +48,7 @@ types:
         maxOccurs: 1
       description: |-
         Defines how quickly the animation will begin to play, and how the game interpolates moving the armature's bones from one animNode to another. 
-    - name: m_blendInTime
+    - name: m_BlendInTime
       metadata:
         type: xs:float
         minOccurs: 0
@@ -270,23 +270,28 @@ types:
 # 2D BLENDS TYPE
   type_2DBlends:
     type: complex
+    composition: choice
     elements:
     - name: m_AnimName
       metadata:
         type: xs:string
         minOccurs: 0
+        maxOccurs: 1
     - name: m_XPos
       metadata:
         type: xs:float
         minOccurs: 0
+        maxOccurs: 1
     - name: m_YPos
       metadata:
         type: xs:float
         minOccurs: 0
+        maxOccurs: 1
     - name: m_SpeedScale
       metadata:
         type: xs:float
         minOccurs: 0
+        maxOccurs: 1
     - name: m_SubStateBoneWeights
       metadata:
         type: type_SubStateBoneWeights
@@ -419,12 +424,12 @@ types:
         type: xs:float
         minOccurs: 0
         maxOccurs: 1
-    - name: m_blendInTime
+    - name: m_BlendInTime
       metadata:
         type: xs:float
         minOccurs: 0
         maxOccurs: 1
-    - name: m_blendOutTime
+    - name: m_BlendOutTime
       metadata:
         type: xs:float
         minOccurs: 0

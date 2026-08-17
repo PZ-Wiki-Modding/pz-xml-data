@@ -43,39 +43,74 @@
   "required": ["description", "patterns", "root", "types"],
   "definitions": {
     "typeDefinition": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": ["simple", "complex"],
-          "description": "Whether this is a simple or complex type"
+      "allOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["simple", "complex"],
+              "description": "Whether this is a simple or complex type"
+            },
+            "composition": {
+              "type": "string",
+              "enum": ["choice", "sequence"],
+              "description": "How elements are composed (for complex types)"
+            },
+            "elements": {
+              "type": "array",
+              "description": "Element definitions (for complex types)",
+              "items": {
+                "$ref": "#/definitions/elementDefinition"
+              }
+            },
+            "attributes": {
+              "type": "array",
+              "description": "Attribute definitions",
+              "items": {
+                "$ref": "#/definitions/attributeDefinition"
+              }
+            },
+            "restrictions": {
+              "$ref": "#/definitions/restrictionDefinition",
+              "description": "Type restriction (for simple types)"
+            }
+          },
+          "required": ["type"]
         },
-        "composition": {
-          "type": "string",
-          "enum": ["choice", "sequence"],
-          "description": "How elements are composed (for complex types)"
-        },
-        "elements": {
-          "type": "array",
-          "description": "Element definitions (for complex types)",
-          "items": {
-            "$ref": "#/definitions/elementDefinition"
+        {
+          "if": {
+            "not": {
+              "properties": {
+                "composition": {
+                  "const": "choice"
+                }
+              },
+              "required": ["composition"]
+            }
+          },
+          "then": {
+            "properties": {
+              "elements": {
+                "items": {
+                  "properties": {
+                    "metadata": {
+                      "properties": {
+                        "maxOccurs": {
+                          "not": {
+                            "const": "unbounded"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
-        },
-        "attributes": {
-          "type": "array",
-          "description": "Attribute definitions",
-          "items": {
-            "$ref": "#/definitions/attributeDefinition"
-          }
-        },
-        "restrictions": {
-          "$ref": "#/definitions/restrictionDefinition",
-          "description": "Type restriction (for simple types)"
         }
-      },
-      "required": ["type"]
+      ]
     },
     "elementDefinition": {
       "type": "object",
@@ -99,7 +134,7 @@
             "minOccurs": {
               "oneOf": [
                 { "type": "integer", "minimum": 0 },
-                { "type": "string" }
+                { "type": "string", "enum": ["unbounded"] }
               ],
               "description": "Minimum occurrences"
             },

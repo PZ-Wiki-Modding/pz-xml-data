@@ -318,7 +318,7 @@
               "type": "xs:string",
               "use": "optional"
             },
-            "description": "Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure: \n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 AnimSets\n    \ud83d\udcc1 Rifle\n      \ud83d\udcc4 LoadRifle.xml\n      \ud83d\udcc4 LoadRifle_Alt.xml\n``` \n\nThe LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:\n```xml\n<animNode x_extends=\"LoadRifle.xml\"></animNode>\n```"
+            "description": "Import relative animNode files into this one which are stored in the same directory. This is only possible for files located in the actual same folder, so only per mod anim node files. \n\nNeeds to be the file name so for the following example folder structure: \n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 AnimSets\n    \ud83d\udcc1 Rifle\n      \ud83d\udcc4 LoadRifle.xml\n      \ud83d\udcc4 LoadRifle_Alt.xml\n``` \n\nThe LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:\n```xml\n<animNode x_extends=\"LoadRifle.xml\"></animNode>\n```\n\nNow take two separate mods:\n```\n\ud83d\udcc1 Mod1\n  \ud83d\udcc1 media\n    \ud83d\udcc1 AnimSets\n      \ud83d\udcc1 Rifle\n        \ud83d\udcc4 LoadRifle.xml\n\ud83d\udcc1 Mod2\n  \ud83d\udcc1 media\n    \ud83d\udcc1 AnimSets\n      \ud83d\udcc1 Rifle\n        \ud83d\udcc4 LoadRifle_Alt.xml\n```\n\nIn this case, the LoadRifle_Alt.xml file in Mod2 cannot import the LoadRifle.xml file from Mod1 because they are in different folders."
           }
         ]
       },

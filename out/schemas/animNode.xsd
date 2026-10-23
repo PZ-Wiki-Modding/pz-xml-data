@@ -132,10 +132,19 @@
     <xs:attribute name="x_extends" type="xs:string" use="optional">
       <xs:annotation>
         <xs:documentation><![CDATA[
-        <p>Import another relative animNode file into this one. Needs to be the file name so for the following example folder structure:</p><pre><code>📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 AnimSets</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 Rifle</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 LoadRifle.xml</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 LoadRifle_Alt.xml</code></pre><p>The LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:
+        <p>Import relative animNode files into this one which are stored in the same directory. This is only possible for files located in the actual same folder, so only per mod anim node files.</p><p>Needs to be the file name so for the following example folder structure:</p><pre><code>📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 AnimSets</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 Rifle</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 LoadRifle.xml</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 LoadRifle_Alt.xml</code></pre><p>The LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:
 ``<code>xml
-&amp;lt;animNode x_extends="LoadRifle.xml"&amp;gt;&amp;lt;/animNode&amp;gt;
-</code>``</p>
+&amp;lt;animNode x_extends="LoadRifle.xml"&amp;gt;&amp;lt;/animNode&amp;gt;</p><pre><code></code></pre><pre><code>Now take two separate mods:</code></pre><p>📁 Mod1
+  📁 media
+    📁 AnimSets
+      📁 Rifle
+        📄 LoadRifle.xml
+📁 Mod2
+  📁 media
+    📁 AnimSets
+      📁 Rifle
+        📄 LoadRifle_Alt.xml
+</code>``</p><p>In this case, the LoadRifle_Alt.xml file in Mod2 cannot import the LoadRifle.xml file from Mod1 because they are in different folders.</p>
         ]]></xs:documentation>
       </xs:annotation>
     </xs:attribute>

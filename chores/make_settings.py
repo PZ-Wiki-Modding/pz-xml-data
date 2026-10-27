@@ -24,4 +24,4 @@ for xml_name, xml_data in data.items():
         })
 
 with open(setting_path, 'w') as f:
-    json.dump(out, f, indent=2)
+    json.dump(out, f, indent=2, sort_keys=True)

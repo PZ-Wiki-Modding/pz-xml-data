@@ -9,624 +9,33 @@
       "type": "type_AnimNode"
     },
     "types": {
-      "type_AnimNode": {
-        "type": "complex",
-        "composition": "choice",
-        "elements": [
-          {
-            "name": "m_Name",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
+      "rule_Time": {
+        "restrictions": {
+          "base": "xs:string",
+          "enumeration": [
+            {
+              "metadata": {
+                "value": "Start"
+              }
             },
-            "description": "A unique identifier for this animation node. For example: \"LoadRiffle\", \"Walk\" etc. This is notably used to reference this animNode in other animNodes."
-          },
-          {
-            "name": "m_AnimName",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "Name of the animation clip to play. This is the name of the animation file without the extension. The animation clip needs to be stored inside the `anims_X` folder and inside a subfolder which matches the character the animation is for. For the player, that subfolder needs to be `Bob`.\n\nFor example, take the animation file `Bob_Reload_Rifle_Load.glb` with the following folder structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 anims_X\n    \ud83d\udcc1 Bob\n      \ud83d\udcc4 Bob_Reload_Rifle_Load.glb\n```\n\nTo reference it in the animNode, you would use:\n```xml\n<m_AnimName>Bob_Reload_Rifle_Load</m_AnimName>\n```"
-          },
-          {
-            "name": "m_BlendTime",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "Defines how quickly the animation will begin to play, and how the game interpolates moving the armature's bones from one animNode to another. "
-          },
-          {
-            "name": "m_BlendInTime",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "Defines how quickly the animation will begin to play, and how the game interpolates moving the armature's bones from one animState to another. It is used to create a smooth transition when the animation is started or changed."
-          },
-          {
-            "name": "m_BlendOutTime",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "Defines how quickly the animation will end, and how the game interpolates moving the armature's bones from one animState to another. It is used to create a smooth transition when the animation is stopped or changed."
-          },
-          {
-            "name": "m_SpeedScale",
-            "metadata": {
-              "type": [
-                "xs:float",
-                "xs:string"
-              ],
-              "minOccurs": 0,
-              "maxOccurs": 1
+            {
+              "metadata": {
+                "value": "End"
+              }
             }
-          },
-          {
-            "name": "m_SpeedScaleRandomMultiplierMin",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_SpeedScaleRandomMultiplierMax",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_TrackTimeToVariable",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_Finished",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "Looks unused."
-          },
-          {
-            "name": "m_Looped",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "Defines whether the animation will loop or not. If set to true, the animation will loop indefinitely until it is manually stopped or [conditions](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/animNode.html#m-conditions) are no longer met."
-          },
-          {
-            "name": "m_AnimReverse",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_Priority",
-            "metadata": {
-              "type": "xs:integer",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "In cases of two animations that are playing at the same time, dictates which animation's bone weights or keyframes will take precedence. An example would be an idle animMask holding a glass which transitions into a drinking animation. The drinking animation takes priority over the idle drink-holding ainmMask if its priority is higher than the idle animation mask's XML. The priority value is an integer starting at 1 with high numbers taking the priority."
-          },
-          {
-            "name": "m_ConditionPriority",
-            "metadata": {
-              "type": "xs:integer",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_maxTorsoTwist",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_Scalar",
-            "metadata": {
-              "type": [
-                "xs:float",
-                "xs:string"
-              ],
-              "minOccurs": 0
-            }
-          },
-          {
-            "name": "m_Scalar2",
-            "metadata": {
-              "type": [
-                "xs:float",
-                "xs:string"
-              ],
-              "minOccurs": 0
-            }
-          },
-          {
-            "name": "m_SyncTrackingEnabled",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0
-            }
-          },
-          {
-            "name": "m_2DBlends",
-            "metadata": {
-              "type": "type_2DBlends",
-              "minOccurs": 0,
-              "maxOccurs": "unbounded"
-            }
-          },
-          {
-            "name": "m_2DBlendTri",
-            "metadata": {
-              "type": "type_2DBlendTri",
-              "minOccurs": 0,
-              "maxOccurs": "unbounded"
-            }
-          },
-          {
-            "name": "m_Conditions",
-            "metadata": {
-              "type": "type_Condition",
-              "minOccurs": 0,
-              "maxOccurs": "unbounded"
-            },
-            "description": "Used to specify conditions that will allow an animation node to be chosen. If the conditions are not met, the node will not be chosen. These are often combined with the function [setVariable](https://demiurgequantified.github.io/ProjectZomboidJavaDocs/zombie/characters/IsoGameCharacter.html#setVariable(java.lang.String,java.lang.String)) (which exists in many forms) to set a specific condition.\n\nThis can notably be used to trigger an animation by setting that condition to be valid, which will make the animation node eligible to be chosen by the game, as long as other conditions are also met.\n\nThe syntax is as follows for the most common cases:\n```xml\n<m_Conditions>\n  <m_Name>VariableName</m_Name>\n  <m_Type>STRING</m_Type>\n  <m_Value>value</m_Value>\n</m_Conditions>\n```\n\nIn the following example, the variable `WeaponReloadType` is set by the game, using the parameter of the same name in the [item script](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#item-weaponreloadtype):\n```xml\n<m_Conditions>\n    <m_Name>WeaponReloadType</m_Name>\n    <m_Type>STRING</m_Type>\n    <m_Value>revolver</m_Value>\n</m_Conditions>\n```"
-          },
-          {
-            "name": "m_Events",
-            "metadata": {
-              "type": "type_Events",
-              "minOccurs": 0,
-              "maxOccurs": "unbounded"
-            },
-            "description": "Used to trigger different events during the animation at specific moments. This can be used to play sounds, set variables, and more. You can find a list of available events [here](https://pzwiki.net/wiki/Events#Available_events)."
-          },
-          {
-            "name": "m_Transitions",
-            "metadata": {
-              "type": "type_Transitions",
-              "minOccurs": 0,
-              "maxOccurs": "unbounded"
-            }
-          },
-          {
-            "name": "m_EarlyTransitionOut",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_StopAnimOnExit",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_SubStateBoneWeights",
-            "metadata": {
-              "type": "type_SubStateBoneWeights",
-              "minOccurs": 0,
-              "maxOccurs": "unbounded"
-            },
-            "description": "Used to define the weight of a bone and its keyframes or descendants. By default, all bones that are not defined with this parameter have a default weight of `1`. If you wanted to make it so an animation were to only play a specific set of bones; you would define the Dummy01 or the Bip01 bones (the parent armature bones) to have a weight of 0, and then specifically define all the bones you wish to play to have a weight value greater than 0."
-          },
-          {
-            "name": "m_DeferredBoneName",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_deferredBoneAxis",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_useDeferedRotation",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_MatchingGrappledAnimNode",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_GrappleOffsetForward",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_GrappleOffsetYaw",
-            "metadata": {
-              "type": "xs:integer",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_GrapplerOffsetBehaviour",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_GrappleTweenInTime",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_useDeferredMovement",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          }
-        ],
-        "attributes": [
-          {
-            "name": "x_extends",
-            "metadata": {
-              "type": "xs:string",
-              "use": "optional"
-            },
-            "description": "Import relative animNode files into this one which are stored in the same directory. This is only possible for files located in the actual same folder, so only per mod anim node files. \n\nNeeds to be the file name so for the following example folder structure: \n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 AnimSets\n    \ud83d\udcc1 Rifle\n      \ud83d\udcc4 LoadRifle.xml\n      \ud83d\udcc4 LoadRifle_Alt.xml\n``` \n\nThe LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:\n```xml\n<animNode x_extends=\"LoadRifle.xml\"></animNode>\n```\n\nNow take two separate mods:\n```\n\ud83d\udcc1 Mod1\n  \ud83d\udcc1 media\n    \ud83d\udcc1 AnimSets\n      \ud83d\udcc1 Rifle\n        \ud83d\udcc4 LoadRifle.xml\n\ud83d\udcc1 Mod2\n  \ud83d\udcc1 media\n    \ud83d\udcc1 AnimSets\n      \ud83d\udcc1 Rifle\n        \ud83d\udcc4 LoadRifle_Alt.xml\n```\n\nIn this case, the LoadRifle_Alt.xml file in Mod2 cannot import the LoadRifle.xml file from Mod1 because they are in different folders."
-          }
-        ]
+          ]
+        },
+        "type": "simple"
       },
-      "type_2DBlends": {
-        "type": "complex",
-        "composition": "choice",
-        "elements": [
-          {
-            "name": "m_AnimName",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_XPos",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_YPos",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_SpeedScale",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_SubStateBoneWeights",
-            "metadata": {
-              "type": "type_SubStateBoneWeights",
-              "minOccurs": 0,
-              "maxOccurs": "unbounded"
-            }
-          }
-        ],
-        "attributes": [
-          {
-            "name": "referenceID",
-            "metadata": {
-              "type": "xs:integer",
-              "use": "optional"
-            }
-          }
-        ]
-      },
-      "type_2DBlendTri": {
-        "type": "complex",
-        "elements": [
-          {
-            "name": "node1",
-            "metadata": {
-              "type": "xs:integer",
-              "minOccurs": 0
-            }
-          },
-          {
-            "name": "node2",
-            "metadata": {
-              "type": "xs:integer",
-              "minOccurs": 0
-            }
-          },
-          {
-            "name": "node3",
-            "metadata": {
-              "type": "xs:integer",
-              "minOccurs": 0
-            }
-          }
-        ]
-      },
-      "type_Condition": {
-        "type": "complex",
-        "elements": [
-          {
-            "name": "m_Name",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0
-            }
-          },
-          {
-            "name": "m_Type",
-            "metadata": {
-              "type": "rule_Type",
-              "minOccurs": 0
-            }
-          },
-          {
-            "name": "m_Condition",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0
-            }
-          },
-          {
-            "name": "m_Value",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0
-            }
-          },
-          {
-            "name": "m_IntValue",
-            "metadata": {
-              "type": "xs:integer",
-              "minOccurs": 0
-            }
-          },
-          {
-            "name": "m_FloatValue",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0
-            }
-          },
-          {
-            "name": "m_BoolValue",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0
-            }
-          },
-          {
-            "name": "m_StringValue",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0
-            }
-          }
-        ],
-        "attributes": [
-          {
-            "name": "x_name",
-            "metadata": {
-              "type": "xs:string",
-              "use": "optional"
-            },
-            "description": "This is unused by the game but it seems to be a simple identifier (often a [GUID](https://pzwiki.net/wiki/GUID)) used by the unreleased [AnimZed](https://pzwiki.net/wiki/AnimZed)."
-          }
-        ]
-      },
-      "type_Events": {
-        "type": "complex",
-        "elements": [
-          {
-            "name": "m_EventName",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "The name of the event to trigger. This can be a custom name but there's also available events that will trigger specific actions. You can find a list of available events [here](https://pzwiki.net/wiki/Events#Available_events)."
-          },
-          {
-            "name": "m_Time",
-            "metadata": {
-              "type": "rule_Time",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "The moment during the animation when the event will be triggered. This can be set to Start or End. "
-          },
-          {
-            "name": "m_TimePc",
-            "metadata": {
-              "type": "rule_TimePc",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "The moment during the animation when the event will be triggered. This uses a normalized time, so `0` is the start and `1` is the end. In comparison to `m_Time`, this allows for more precision of when to trigger the event."
-          },
-          {
-            "name": "m_ParameterValue",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "The value to pass to the event when it is triggered. This can be used to specify which sound to play, which variable to set, and more, depending on the event being triggered. "
-          }
-        ],
-        "attributes": [
-          {
-            "name": "x_name",
-            "metadata": {
-              "type": "xs:string",
-              "use": "optional"
-            },
-            "#desc": "type_Condition/attributes/x_name",
-            "description": "This is unused by the game but it seems to be a simple identifier (often a [GUID](https://pzwiki.net/wiki/GUID)) used by the unreleased [AnimZed](https://pzwiki.net/wiki/AnimZed)."
-          }
-        ]
-      },
-      "type_Transitions": {
-        "type": "complex",
-        "composition": "choice",
-        "elements": [
-          {
-            "name": "m_Target",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0
-            },
-            "description": "The name of the target animNode to transition to. This is the value of the `m_Name` field in the target animNode."
-          },
-          {
-            "name": "m_AnimName",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_BlendTime",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_BlendInTime",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_BlendOutTime",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_speedScale",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_Conditions",
-            "metadata": {
-              "type": "type_Condition",
-              "minOccurs": 0,
-              "maxOccurs": "unbounded"
-            }
-          },
-          {
-            "name": "m_EarlyTransitionOut",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          }
-        ]
-      },
-      "type_SubStateBoneWeights": {
-        "type": "complex",
-        "elements": [
-          {
-            "name": "boneName",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "includeDescendants",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "weight",
-            "metadata": {
-              "type": "xs:float",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          }
-        ]
+      "rule_TimePc": {
+        "restrictions": {
+          "base": "xs:float",
+          "maximum": 1,
+          "minimum": 0
+        },
+        "type": "simple"
       },
       "rule_Type": {
-        "type": "simple",
         "restrictions": {
           "base": "xs:string",
           "enumeration": [
@@ -681,268 +90,624 @@
               }
             }
           ]
-        }
+        },
+        "type": "simple"
       },
-      "rule_Time": {
-        "type": "simple",
-        "restrictions": {
-          "base": "xs:string",
-          "enumeration": [
-            {
-              "metadata": {
-                "value": "Start"
-              }
-            },
-            {
-              "metadata": {
-                "value": "End"
-              }
-            }
-          ]
-        }
-      },
-      "rule_TimePc": {
-        "type": "simple",
-        "restrictions": {
-          "base": "xs:float",
-          "minimum": 0,
-          "maximum": 1
-        }
-      }
-    }
-  },
-  "clothingItem": {
-    "description": "Clothing items are first defined with an [item](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html) script block, but a lot of their properties are defined in the clothing item XML files. Some of these properties include masks, textures, shaders, and models. The clothing items are linked to these files via the [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) parameter. The clothing item XML files need to be stored in the path `media/clothing/clothingItems/` for the game to recognize them.\n\nDue to all the GUID work between the clothing.xml, fileGuidTable.xml and clothingItem.xml files, it can be easy to get lost. [Outfit XML Convereter](https://pzwiki.net/wiki/Outfit_XML_Converter) can help you with the process.",
-    "patterns": [
-      "**/clothing/clothingItems/**/*.xml"
-    ],
-    "root": {
-      "name": "clothingItem",
-      "type": "type_clothingItem"
-    },
-    "types": {
-      "type_clothingItem": {
-        "type": "complex",
-        "composition": "choice",
+      "type_2DBlendTri": {
         "elements": [
           {
-            "name": "m_MaleModel",
             "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters **should** be left empty when the clothing item is a body texture.\n\nThe model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in `media/models_X` and accessed relative to it.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 models_X\n    \ud83d\udcc1 MyAwesomeClothing\n      \ud83d\udcc4 myClothing.fbx\n```\n\nThese parameters should have this following syntax:\n```\n<m_MaleModel>MyAwesomeClothing/myClothing</m_MaleModel>\n```\n\nThe path separators can be either unix with `/` or `\\\\`, both are valid. Make sure to not add the extension.\n\n[m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in `media/lua/shared/NPCs/BodyLocations.lua` for the vanilla game)."
-          },
-          {
-            "name": "m_FemaleModel",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "#desc": "type_clothingItem/elements/m_MaleModel",
-            "description": "The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters **should** be left empty when the clothing item is a body texture.\n\nThe model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in `media/models_X` and accessed relative to it.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 models_X\n    \ud83d\udcc1 MyAwesomeClothing\n      \ud83d\udcc4 myClothing.fbx\n```\n\nThese parameters should have this following syntax:\n```\n<m_MaleModel>MyAwesomeClothing/myClothing</m_MaleModel>\n```\n\nThe path separators can be either unix with `/` or `\\\\`, both are valid. Make sure to not add the extension.\n\n[m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in `media/lua/shared/NPCs/BodyLocations.lua` for the vanilla game)."
-          },
-          {
-            "name": "m_AltMaleModel",
-            "metadata": {
-              "type": "xs:string",
               "minOccurs": 0,
-              "maxOccurs": 1
+              "type": "xs:integer"
             },
-            "#desc": "type_clothingItem/elements/m_MaleModel",
-            "description": "The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters **should** be left empty when the clothing item is a body texture.\n\nThe model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in `media/models_X` and accessed relative to it.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 models_X\n    \ud83d\udcc1 MyAwesomeClothing\n      \ud83d\udcc4 myClothing.fbx\n```\n\nThese parameters should have this following syntax:\n```\n<m_MaleModel>MyAwesomeClothing/myClothing</m_MaleModel>\n```\n\nThe path separators can be either unix with `/` or `\\\\`, both are valid. Make sure to not add the extension.\n\n[m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in `media/lua/shared/NPCs/BodyLocations.lua` for the vanilla game)."
+            "name": "node1"
           },
           {
-            "name": "m_AltFemaleModel",
             "metadata": {
-              "type": "xs:string",
               "minOccurs": 0,
-              "maxOccurs": 1
+              "type": "xs:integer"
             },
-            "#desc": "type_clothingItem/elements/m_MaleModel",
-            "description": "The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters **should** be left empty when the clothing item is a body texture.\n\nThe model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in `media/models_X` and accessed relative to it.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 models_X\n    \ud83d\udcc1 MyAwesomeClothing\n      \ud83d\udcc4 myClothing.fbx\n```\n\nThese parameters should have this following syntax:\n```\n<m_MaleModel>MyAwesomeClothing/myClothing</m_MaleModel>\n```\n\nThe path separators can be either unix with `/` or `\\\\`, both are valid. Make sure to not add the extension.\n\n[m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in `media/lua/shared/NPCs/BodyLocations.lua` for the vanilla game)."
+            "name": "node2"
           },
           {
-            "name": "m_GUID",
             "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "The [GUID](https://pzwiki.net/wiki/GUID) of the clothing item. This needs to be the same as the one inside the [fileGuidTable](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/fileGuidTable.html#guid) file for the clothing item to be recognized by the game."
-          },
-          {
-            "name": "m_Static",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "If `true`, the clothing item won't deform with the character's body. This is used for items like backpacks or hats that should not change shape with the character's body."
-          },
-          {
-            "name": "m_AllowRandomHue",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "When `m_AllowRandomHue` is set to `true`, the clothing item will have a random hue applied to it. This will only affect colored areas of the clothing item. This is different than [m_AllowRandomTint](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomtint) which applies a random color on white areas.\n\n[m_AllowRandomTint](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomtint) needs to be turned off."
-          },
-          {
-            "name": "m_AllowRandomTint",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "When `m_AllowRandomTint` is set to `true`, the clothing item will have a random tint applied to it. This mostly affects white areas of the clothing item. Colored areas will become darker or shift to a brownish color.\n\n[m_AllowRandomHue](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomhue) needs to be turned off."
-          },
-          {
-            "name": "m_AttachBone",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "Specifies a bone to attach the clothing item to. Mostly notably used for hats and some arm protection items. To attach to the head, use `Bip01_Head`."
-          },
-          {
-            "name": "m_Shader",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "Specifies a shader to use for the clothing item. The default shader used by clothing items is `basicEffect`. The value needs to be the filename of the shader inside the folder `media/shaders`."
-          },
-          {
-            "name": "textureChoices",
-            "metadata": {
-              "type": "xs:string",
               "minOccurs": 0,
-              "maxOccurs": "unbounded"
+              "type": "xs:integer"
             },
-            "description": "[textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices) sets the texture used by the clothing item. Many of those can be provided as random choices for the clothing item. The textures need to be stored in the folder `media/textures`.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 textures\n    \ud83d\udcc1 CoolMod\n      \ud83d\udcc4 texture1.png\n      \ud83d\udcc4 texture2.png\n```\n\nYou'd have:\n```xml\n<textureChoices>CoolMod/texture1</textureChoices>\n<textureChoices>CoolMod/texture2</textureChoices>\n```\n\n[m_BaseTextures](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-basetextures) is used specifically for 2D clothing items that are applied on the character's body directly (tshirts, pants, socks...). The folder structure is the same as for [textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices)."
-          },
+            "name": "node3"
+          }
+        ],
+        "type": "complex"
+      },
+      "type_2DBlends": {
+        "attributes": [
           {
-            "name": "m_BaseTextures",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": "unbounded"
-            },
-            "#desc": "type_clothingItem/elements/textureChoices",
-            "description": "[textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices) sets the texture used by the clothing item. Many of those can be provided as random choices for the clothing item. The textures need to be stored in the folder `media/textures`.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 textures\n    \ud83d\udcc1 CoolMod\n      \ud83d\udcc4 texture1.png\n      \ud83d\udcc4 texture2.png\n```\n\nYou'd have:\n```xml\n<textureChoices>CoolMod/texture1</textureChoices>\n<textureChoices>CoolMod/texture2</textureChoices>\n```\n\n[m_BaseTextures](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-basetextures) is used specifically for 2D clothing items that are applied on the character's body directly (tshirts, pants, socks...). The folder structure is the same as for [textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices)."
-          },
-          {
-            "name": "m_Masks",
             "metadata": {
               "type": "xs:integer",
-              "minOccurs": 0,
-              "maxOccurs": "unbounded"
+              "use": "optional"
             },
-            "description": "[m_Masks](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-masks) when set to a specific integer value will hide specific elements of the character's body model. This is notably used to remove clipping with body parts that are hidden by the clothing item. For example, a jacket will hide the torso and arms, so to reduce risks of clipping you may want to hide these.\n\nYou can find a list of the values and their corresponding body parts in the Project Zomboid Modding Archives [here](https://github.com/PZ-Wiki-Modding/Archive.Project-Zomboid-Modding/blob/main/Clothing/Masks/Mask.png).\n\nYou can insert as many of these as you want, for example:\n```xml\n<m_Masks>12</m_Masks>\n<m_Masks>13</m_Masks>\n<m_Masks>14</m_Masks>\n<m_Masks>3</m_Masks>\n<m_Masks>5</m_Masks>\n```\n\n[m_UnderlayMasksFolder](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-underlaymasksfolder) supposedly is used to add a texture folder in which you have modified versions of these masks if you ever need to adjust the masks for your own clothing items without clashing with other mods custom masks."
-          },
-          {
-            "name": "m_MasksFolder",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "Default value is `media/textures/Body/Masks`. Some clothing behaviors seem to be hardcoded to this path. You can notably use it to deactivate masks by setting the value to `media/textures/Clothes/Hat/Masks`, but it will also deactivate damage (holes) and blood effects."
-          },
-          {
-            "name": "m_UnderlayMasksFolder",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "Default value is `media/textures/Body/UnderlayMasks`. Some clothing behaviors seem to be hardcoded to this path."
-          },
-          {
-            "name": "m_HatCategory",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "Seems to be used to specify if a hat will hide the hair and beard. Notable values are:\n- `default`\n- `nohairnobeard`\n- `nobeard`\n- `nohair`\n\nThen values `Group` followed by a number `01`, `02`, etc are also used."
-          },
-          {
-            "name": "m_SpawnWith",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": "unbounded"
-            },
-            "description": "Link to other items that this clothingItem should spawn with. This is for example used to make left and right elbow pads spawn together. The value needs to be the [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the other clothing item.\n\nTo add multiple items, you can add multiple `<m_SpawnWith>` elements:\n```xml\n<m_SpawnWith>GUID1</m_SpawnWith>\n<m_SpawnWith>GUID2</m_SpawnWith>\n<m_SpawnWith>GUID3</m_SpawnWith>\n...\n```"
-          },
-          {
-            "name": "m_DecalGroup",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "Refers to the [name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#name) parameter of a decal group defined in the [clothingDecals.xml](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html) file. The clothing decals are used to add additional textures on top of the clothing item. This is most notably used to add logos on t-shirts, and it is possible to add multiple logos on a single decal group."
+            "name": "referenceID"
           }
-        ]
-      }
-    }
-  },
-  "fileGuidTable": {
-    "description": "Associate [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) files to a GUID for access in the [clothing](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html) file. Whenever you want to use vanilla clothing in your clothing.xml file, you have to redefine them in your own mod's fileGuidTable.xml file, otherwise the game will not recognize them.\n\nAn example file would look like this:\n```xml\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<fileGuidTable>\n  <files>\n    <path>media/clothing/clothingItems/MyClothingItem.xml</path>\n    <guid>YOUR_RANDOM_CLOTHING_ITEM_GUID_HERE</guid>\n  </files>\n  <files>\n    <path>media/clothing/clothingItems/MyOtherClothingItem.xml</path>\n    <guid>YOUR_OTHER_RANDOM_CLOTHING_ITEM_GUID_HERE</guid>\n  </files>\n</fileGuidTable>\n```\n\nDue to all the GUID work between the clothing.xml, fileGuidTable.xml and clothingItem.xml files, it can be easy to get lost. [Outfit XML Convereter](https://pzwiki.net/wiki/Outfit_XML_Converter) can help you with the process.",
-    "patterns": [
-      "**/media/fileGuidTable.xml"
-    ],
-    "root": {
-      "name": "fileGuidTable",
-      "type": "type_fileGuidTable"
-    },
-    "types": {
-      "type_fileGuidTable": {
-        "type": "complex",
+        ],
         "composition": "choice",
         "elements": [
           {
-            "name": "files",
             "metadata": {
-              "type": "type_fileGuidTable_files",
+              "maxOccurs": 1,
               "minOccurs": 0,
-              "maxOccurs": "unbounded"
+              "type": "xs:string"
             },
-            "description": "Define a [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) file and GUID association.\n\nFor example for a clothingItem with the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 clothing\n    \ud83d\udcc1 clothingItems\n      \ud83d\udcc4 MyClothingItem.xml\n```\n\nYou should have the following parameters:\n```xml\n<files>\n  <path>media/clothing/clothingItems/MyClothingItem.xml</path>\n  <guid>YOUR_RANDOM_CLOTHING_ITEM_GUID_HERE</guid>\n</files>\n```"
-          }
-        ]
-      },
-      "type_fileGuidTable_files": {
-        "type": "complex",
-        "composition": "sequence",
-        "elements": [
-          {
-            "name": "path",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "The path to the [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) file. This path is relative to the upper folder of `media`, for example for the following structure:\n```\n\ud83d\udcc1 MyMod\n  \ud83d\udcc1 media\n    \ud83d\udcc1 clothing\n      \ud83d\udcc1 clothingItems\n        \ud83d\udcc4 MyClothingItem.xml\n```\n\nYou need the following parameter:\n```xml\n<path>media/clothing/clothingItems/MyClothingItem.xml</path>\n```"
+            "name": "m_AnimName"
           },
           {
-            "name": "guid",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_XPos"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_YPos"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_SpeedScale"
+          },
+          {
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "type_SubStateBoneWeights"
+            },
+            "name": "m_SubStateBoneWeights"
+          }
+        ],
+        "type": "complex"
+      },
+      "type_AnimNode": {
+        "attributes": [
+          {
+            "description": "Import relative animNode files into this one which are stored in the same directory. This is only possible for files located in the actual same folder, so only per mod anim node files. \n\nNeeds to be the file name so for the following example folder structure: \n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 AnimSets\n    \ud83d\udcc1 Rifle\n      \ud83d\udcc4 LoadRifle.xml\n      \ud83d\udcc4 LoadRifle_Alt.xml\n``` \n\nThe LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:\n```xml\n<animNode x_extends=\"LoadRifle.xml\"></animNode>\n```\n\nNow take two separate mods:\n```\n\ud83d\udcc1 Mod1\n  \ud83d\udcc1 media\n    \ud83d\udcc1 AnimSets\n      \ud83d\udcc1 Rifle\n        \ud83d\udcc4 LoadRifle.xml\n\ud83d\udcc1 Mod2\n  \ud83d\udcc1 media\n    \ud83d\udcc1 AnimSets\n      \ud83d\udcc1 Rifle\n        \ud83d\udcc4 LoadRifle_Alt.xml\n```\n\nIn this case, the LoadRifle_Alt.xml file in Mod2 cannot import the LoadRifle.xml file from Mod1 because they are in different folders.",
             "metadata": {
               "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
+              "use": "optional"
             },
-            "description": "The [GUID](https://pzwiki.net/wiki/GUID) of the clothing item. This needs to be the same as the one inside the [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) file for the clothing item to be recognized by the game."
+            "name": "x_extends"
           }
-        ]
+        ],
+        "composition": "choice",
+        "elements": [
+          {
+            "description": "A unique identifier for this animation node. For example: \"LoadRiffle\", \"Walk\" etc. This is notably used to reference this animNode in other animNodes.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "m_Name"
+          },
+          {
+            "description": "Name of the animation clip to play. This is the name of the animation file without the extension. The animation clip needs to be stored inside the `anims_X` folder and inside a subfolder which matches the character the animation is for. For the player, that subfolder needs to be `Bob`.\n\nFor example, take the animation file `Bob_Reload_Rifle_Load.glb` with the following folder structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 anims_X\n    \ud83d\udcc1 Bob\n      \ud83d\udcc4 Bob_Reload_Rifle_Load.glb\n```\n\nTo reference it in the animNode, you would use:\n```xml\n<m_AnimName>Bob_Reload_Rifle_Load</m_AnimName>\n```",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_AnimName"
+          },
+          {
+            "description": "Defines how quickly the animation will begin to play, and how the game interpolates moving the armature's bones from one animNode to another. ",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_BlendTime"
+          },
+          {
+            "description": "Defines how quickly the animation will begin to play, and how the game interpolates moving the armature's bones from one animState to another. It is used to create a smooth transition when the animation is started or changed.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_BlendInTime"
+          },
+          {
+            "description": "Defines how quickly the animation will end, and how the game interpolates moving the armature's bones from one animState to another. It is used to create a smooth transition when the animation is stopped or changed.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_BlendOutTime"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": [
+                "xs:float",
+                "xs:string"
+              ]
+            },
+            "name": "m_SpeedScale"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_SpeedScaleRandomMultiplierMin"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_SpeedScaleRandomMultiplierMax"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_TrackTimeToVariable"
+          },
+          {
+            "description": "Looks unused.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_Finished"
+          },
+          {
+            "description": "Defines whether the animation will loop or not. If set to true, the animation will loop indefinitely until it is manually stopped or [conditions](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/animNode.html#m-conditions) are no longer met.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_Looped"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_AnimReverse"
+          },
+          {
+            "description": "In cases of two animations that are playing at the same time, dictates which animation's bone weights or keyframes will take precedence. An example would be an idle animMask holding a glass which transitions into a drinking animation. The drinking animation takes priority over the idle drink-holding ainmMask if its priority is higher than the idle animation mask's XML. The priority value is an integer starting at 1 with high numbers taking the priority.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:integer"
+            },
+            "name": "m_Priority"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:integer"
+            },
+            "name": "m_ConditionPriority"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_maxTorsoTwist"
+          },
+          {
+            "metadata": {
+              "minOccurs": 0,
+              "type": [
+                "xs:float",
+                "xs:string"
+              ]
+            },
+            "name": "m_Scalar"
+          },
+          {
+            "metadata": {
+              "minOccurs": 0,
+              "type": [
+                "xs:float",
+                "xs:string"
+              ]
+            },
+            "name": "m_Scalar2"
+          },
+          {
+            "metadata": {
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_SyncTrackingEnabled"
+          },
+          {
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "type_2DBlends"
+            },
+            "name": "m_2DBlends"
+          },
+          {
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "type_2DBlendTri"
+            },
+            "name": "m_2DBlendTri"
+          },
+          {
+            "description": "Used to specify conditions that will allow an animation node to be chosen. If the conditions are not met, the node will not be chosen. These are often combined with the function [setVariable](https://demiurgequantified.github.io/ProjectZomboidJavaDocs/zombie/characters/IsoGameCharacter.html#setVariable(java.lang.String,java.lang.String)) (which exists in many forms) to set a specific condition.\n\nThis can notably be used to trigger an animation by setting that condition to be valid, which will make the animation node eligible to be chosen by the game, as long as other conditions are also met.\n\nThe syntax is as follows for the most common cases:\n```xml\n<m_Conditions>\n  <m_Name>VariableName</m_Name>\n  <m_Type>STRING</m_Type>\n  <m_Value>value</m_Value>\n</m_Conditions>\n```\n\nIn the following example, the variable `WeaponReloadType` is set by the game, using the parameter of the same name in the [item script](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#item-weaponreloadtype):\n```xml\n<m_Conditions>\n    <m_Name>WeaponReloadType</m_Name>\n    <m_Type>STRING</m_Type>\n    <m_Value>revolver</m_Value>\n</m_Conditions>\n```",
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "type_Condition"
+            },
+            "name": "m_Conditions"
+          },
+          {
+            "description": "Used to trigger different events during the animation at specific moments. This can be used to play sounds, set variables, and more. You can find a list of available events [here](https://pzwiki.net/wiki/Events#Available_events).",
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "type_Events"
+            },
+            "name": "m_Events"
+          },
+          {
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "type_Transitions"
+            },
+            "name": "m_Transitions"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_EarlyTransitionOut"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_StopAnimOnExit"
+          },
+          {
+            "description": "Used to define the weight of a bone and its keyframes or descendants. By default, all bones that are not defined with this parameter have a default weight of `1`. If you wanted to make it so an animation were to only play a specific set of bones; you would define the Dummy01 or the Bip01 bones (the parent armature bones) to have a weight of 0, and then specifically define all the bones you wish to play to have a weight value greater than 0.",
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "type_SubStateBoneWeights"
+            },
+            "name": "m_SubStateBoneWeights"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_DeferredBoneName"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_deferredBoneAxis"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_useDeferedRotation"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_MatchingGrappledAnimNode"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_GrappleOffsetForward"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:integer"
+            },
+            "name": "m_GrappleOffsetYaw"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_GrapplerOffsetBehaviour"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_GrappleTweenInTime"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_useDeferredMovement"
+          }
+        ],
+        "type": "complex"
+      },
+      "type_Condition": {
+        "attributes": [
+          {
+            "description": "This is unused by the game but it seems to be a simple identifier (often a [GUID](https://pzwiki.net/wiki/GUID)) used by the unreleased [AnimZed](https://pzwiki.net/wiki/AnimZed).",
+            "metadata": {
+              "type": "xs:string",
+              "use": "optional"
+            },
+            "name": "x_name"
+          }
+        ],
+        "elements": [
+          {
+            "metadata": {
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_Name"
+          },
+          {
+            "metadata": {
+              "minOccurs": 0,
+              "type": "rule_Type"
+            },
+            "name": "m_Type"
+          },
+          {
+            "metadata": {
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_Condition"
+          },
+          {
+            "metadata": {
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_Value"
+          },
+          {
+            "metadata": {
+              "minOccurs": 0,
+              "type": "xs:integer"
+            },
+            "name": "m_IntValue"
+          },
+          {
+            "metadata": {
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_FloatValue"
+          },
+          {
+            "metadata": {
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_BoolValue"
+          },
+          {
+            "metadata": {
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_StringValue"
+          }
+        ],
+        "type": "complex"
+      },
+      "type_Events": {
+        "attributes": [
+          {
+            "#desc": "type_Condition/attributes/x_name",
+            "description": "This is unused by the game but it seems to be a simple identifier (often a [GUID](https://pzwiki.net/wiki/GUID)) used by the unreleased [AnimZed](https://pzwiki.net/wiki/AnimZed).",
+            "metadata": {
+              "type": "xs:string",
+              "use": "optional"
+            },
+            "name": "x_name"
+          }
+        ],
+        "elements": [
+          {
+            "description": "The name of the event to trigger. This can be a custom name but there's also available events that will trigger specific actions. You can find a list of available events [here](https://pzwiki.net/wiki/Events#Available_events).",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_EventName"
+          },
+          {
+            "description": "The moment during the animation when the event will be triggered. This can be set to Start or End. ",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "rule_Time"
+            },
+            "name": "m_Time"
+          },
+          {
+            "description": "The moment during the animation when the event will be triggered. This uses a normalized time, so `0` is the start and `1` is the end. In comparison to `m_Time`, this allows for more precision of when to trigger the event.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "rule_TimePc"
+            },
+            "name": "m_TimePc"
+          },
+          {
+            "description": "The value to pass to the event when it is triggered. This can be used to specify which sound to play, which variable to set, and more, depending on the event being triggered. ",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_ParameterValue"
+          }
+        ],
+        "type": "complex"
+      },
+      "type_SubStateBoneWeights": {
+        "elements": [
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "boneName"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "includeDescendants"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "weight"
+          }
+        ],
+        "type": "complex"
+      },
+      "type_Transitions": {
+        "composition": "choice",
+        "elements": [
+          {
+            "description": "The name of the target animNode to transition to. This is the value of the `m_Name` field in the target animNode.",
+            "metadata": {
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_Target"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_AnimName"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_BlendTime"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_BlendInTime"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_BlendOutTime"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:float"
+            },
+            "name": "m_speedScale"
+          },
+          {
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "type_Condition"
+            },
+            "name": "m_Conditions"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_EarlyTransitionOut"
+          }
+        ],
+        "type": "complex"
       }
     }
   },
@@ -957,155 +722,155 @@
     },
     "types": {
       "type_clothing": {
-        "type": "complex",
         "composition": "choice",
         "elements": [
           {
-            "name": "m_FemaleOutfits",
+            "description": "Define an outfit with [m_FemaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-femaleoutfits) and [m_MaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-maleoutfits) respectively for the female and male characters. If one of the two is not defined, it won't spawn naturally on the other gender in the game. Both male and female outfits can (and probably should) keep the same [m_Name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-name) and [m_Guid](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-guid) values.",
             "metadata": {
               "type": "type_outfit"
             },
-            "description": "Define an outfit with [m_FemaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-femaleoutfits) and [m_MaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-maleoutfits) respectively for the female and male characters. If one of the two is not defined, it won't spawn naturally on the other gender in the game. Both male and female outfits can (and probably should) keep the same [m_Name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-name) and [m_Guid](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-guid) values."
+            "name": "m_FemaleOutfits"
           },
           {
-            "name": "m_MaleOutfits",
-            "metadata": {
-              "type": "type_outfit"
-            },
             "#desc": "type_clothing/elements/m_FemaleOutfits",
-            "description": "Define an outfit with [m_FemaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-femaleoutfits) and [m_MaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-maleoutfits) respectively for the female and male characters. If one of the two is not defined, it won't spawn naturally on the other gender in the game. Both male and female outfits can (and probably should) keep the same [m_Name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-name) and [m_Guid](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-guid) values."
+            "description": "Define an outfit with [m_FemaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-femaleoutfits) and [m_MaleOutfits](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-maleoutfits) respectively for the female and male characters. If one of the two is not defined, it won't spawn naturally on the other gender in the game. Both male and female outfits can (and probably should) keep the same [m_Name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-name) and [m_Guid](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-guid) values.",
+            "metadata": {
+              "type": "type_outfit"
+            },
+            "name": "m_MaleOutfits"
           }
-        ]
-      },
-      "type_outfit": {
-        "type": "complex",
-        "composition": "choice",
-        "elements": [
-          {
-            "name": "m_Name",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "The unique identifier for the outfit. Preferably keep it the same for the male and female variants."
-          },
-          {
-            "name": "m_Guid",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
-            "description": "The [GUID](https://pzwiki.net/wiki/GUID) of the outfit. This is the GUID associated to the clothing in the [fileGuidTable](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/fileGuidTable.html#guid) and [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) files.\n\nTo use a vanilla clothing item in your outfit, you need to redefine it in your own mod's fileGuidTable.xml file, otherwise the game will not recognize it."
-          },
-          {
-            "name": "m_Top",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            },
-            "description": "If set to `true`, the outfit will spawn with random pants or shirts, respectivement for the parameters [m_Pants](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-pants) and [m_Top](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-top). When those two parameters are not set, they default to `true`."
-          },
-          {
-            "name": "m_Pants",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_AllowPantsHue",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_AllowTopTint",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_AllowPantsTint",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_AllowTShirtDecal",
-            "metadata": {
-              "type": "xs:boolean",
-              "minOccurs": 0,
-              "maxOccurs": 1
-            }
-          },
-          {
-            "name": "m_items",
-            "metadata": {
-              "type": "type_item",
-              "minOccurs": 1,
-              "maxOccurs": "unbounded"
-            }
-          }
-        ]
+        ],
+        "type": "complex"
       },
       "type_item": {
-        "type": "complex",
         "composition": "choice",
         "elements": [
           {
-            "name": "probability",
+            "description": "The probability of the item being selected for the outfit. Needs to be a value between 0.0 and 1.0.",
             "metadata": {
-              "type": "xs:float",
+              "maxOccurs": 1,
               "minOccurs": 1,
-              "maxOccurs": 1
+              "type": "xs:float"
             },
-            "description": "The probability of the item being selected for the outfit. Needs to be a value between 0.0 and 1.0."
+            "name": "probability"
           },
           {
-            "name": "itemGUID",
+            "description": "The [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the clothing item that should be part of the outfit. You can define extra outfits thanks to the [subItems](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-subitems) parameter.",
             "metadata": {
-              "type": "xs:string",
+              "maxOccurs": 1,
               "minOccurs": 1,
-              "maxOccurs": 1
+              "type": "xs:string"
             },
-            "description": "The [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the clothing item that should be part of the outfit. You can define extra outfits thanks to the [subItems](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-subitems) parameter."
+            "name": "itemGUID"
           },
           {
-            "name": "subItems",
+            "description": "Define a sub-item for a specific clothing item used in the outfit, so other items can also be picked. Any sub-item can be added as variant choices.",
             "metadata": {
-              "type": "type_subItem",
+              "maxOccurs": "unbounded",
               "minOccurs": 0,
-              "maxOccurs": "unbounded"
+              "type": "type_subItem"
             },
-            "description": "Define a sub-item for a specific clothing item used in the outfit, so other items can also be picked. Any sub-item can be added as variant choices."
+            "name": "subItems"
           }
-        ]
+        ],
+        "type": "complex"
+      },
+      "type_outfit": {
+        "composition": "choice",
+        "elements": [
+          {
+            "description": "The unique identifier for the outfit. Preferably keep it the same for the male and female variants.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "m_Name"
+          },
+          {
+            "description": "The [GUID](https://pzwiki.net/wiki/GUID) of the outfit. This is the GUID associated to the clothing in the [fileGuidTable](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/fileGuidTable.html#guid) and [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) files.\n\nTo use a vanilla clothing item in your outfit, you need to redefine it in your own mod's fileGuidTable.xml file, otherwise the game will not recognize it.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "m_Guid"
+          },
+          {
+            "description": "If set to `true`, the outfit will spawn with random pants or shirts, respectivement for the parameters [m_Pants](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-pants) and [m_Top](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-top). When those two parameters are not set, they default to `true`.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_Top"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_Pants"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_AllowPantsHue"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_AllowTopTint"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_AllowPantsTint"
+          },
+          {
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:boolean"
+            },
+            "name": "m_AllowTShirtDecal"
+          },
+          {
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 1,
+              "type": "type_item"
+            },
+            "name": "m_items"
+          }
+        ],
+        "type": "complex"
       },
       "type_subItem": {
-        "type": "complex",
         "composition": "choice",
         "elements": [
           {
-            "name": "itemGUID",
-            "metadata": {
-              "type": "xs:string",
-              "minOccurs": 1,
-              "maxOccurs": 1
-            },
             "#desc": "type_item/elements/itemGUID",
-            "description": "The [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the clothing item that should be part of the outfit. You can define extra outfits thanks to the [subItems](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-subitems) parameter."
+            "description": "The [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the clothing item that should be part of the outfit. You can define extra outfits thanks to the [subItems](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html#m-subitems) parameter.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "itemGUID"
           }
-        ]
+        ],
+        "type": "complex"
       }
     }
   },
@@ -1119,53 +884,288 @@
       "type": "type_clothingDecals"
     },
     "types": {
-      "type_clothingDecals": {
-        "type": "complex",
-        "composition": "choice",
-        "elements": [
-          {
-            "name": "group",
-            "metadata": {
-              "type": "type_clothingDecalGroup",
-              "minOccurs": 0,
-              "maxOccurs": "unbounded"
-            },
-            "description": "Defines a decal group, that is a collection of decals associated to a name for referencing."
-          }
-        ]
-      },
       "type_clothingDecalGroup": {
-        "type": "complex",
         "composition": "choice",
         "elements": [
           {
-            "name": "name",
+            "description": "A unique identifier for the decal group.",
             "metadata": {
-              "type": "xs:string",
+              "maxOccurs": 1,
               "minOccurs": 1,
-              "maxOccurs": 1
+              "type": "xs:string"
             },
-            "description": "A unique identifier for the decal group."
+            "name": "name"
           },
           {
-            "name": "decal",
+            "description": "Refers to a texture file stored inside the folder `media/textures/shirtdecals/`. The value needs to be the name of the file without the extension (which needs to be `.png`). Alternatively, it seems the game also accepts decals inside texture packs.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 textures\n    \ud83d\udcc1 shirtdecals\n      \ud83d\udcc4 myDecal.png\n      \ud83d\udcc4 anotherDecal.png\n```\n\nThe decal parameter should have this following syntax:\n```\n<decal>myDecal</decal>\n<decal>anotherDecal</decal>\n```",
             "metadata": {
-              "type": "xs:string",
+              "maxOccurs": "unbounded",
               "minOccurs": 0,
-              "maxOccurs": "unbounded"
+              "type": "xs:string"
             },
-            "description": "Refers to a texture file stored inside the folder `media/textures/shirtdecals/`. The value needs to be the name of the file without the extension (which needs to be `.png`). Alternatively, it seems the game also accepts decals inside texture packs.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 textures\n    \ud83d\udcc1 shirtdecals\n      \ud83d\udcc4 myDecal.png\n      \ud83d\udcc4 anotherDecal.png\n```\n\nThe decal parameter should have this following syntax:\n```\n<decal>myDecal</decal>\n<decal>anotherDecal</decal>\n```"
+            "name": "decal"
           },
           {
-            "name": "group",
+            "description": "Refers to another [group](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#group). This allows that group to use decals of the referenced group.",
             "metadata": {
-              "type": "xs:string",
+              "maxOccurs": "unbounded",
               "minOccurs": 0,
-              "maxOccurs": "unbounded"
+              "type": "xs:string"
             },
-            "description": "Refers to another [group](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#group). This allows that group to use decals of the referenced group."
+            "name": "group"
           }
-        ]
+        ],
+        "type": "complex"
+      },
+      "type_clothingDecals": {
+        "composition": "choice",
+        "elements": [
+          {
+            "description": "Defines a decal group, that is a collection of decals associated to a name for referencing.",
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "type_clothingDecalGroup"
+            },
+            "name": "group"
+          }
+        ],
+        "type": "complex"
+      }
+    }
+  },
+  "clothingItem": {
+    "description": "Clothing items are first defined with an [item](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html) script block, but a lot of their properties are defined in the clothing item XML files. Some of these properties include masks, textures, shaders, and models. The clothing items are linked to these files via the [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) parameter. The clothing item XML files need to be stored in the path `media/clothing/clothingItems/` for the game to recognize them.\n\nDue to all the GUID work between the clothing.xml, fileGuidTable.xml and clothingItem.xml files, it can be easy to get lost. [Outfit XML Convereter](https://pzwiki.net/wiki/Outfit_XML_Converter) can help you with the process.",
+    "patterns": [
+      "**/clothing/clothingItems/**/*.xml"
+    ],
+    "root": {
+      "name": "clothingItem",
+      "type": "type_clothingItem"
+    },
+    "types": {
+      "type_clothingItem": {
+        "composition": "choice",
+        "elements": [
+          {
+            "description": "The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters **should** be left empty when the clothing item is a body texture.\n\nThe model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in `media/models_X` and accessed relative to it.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 models_X\n    \ud83d\udcc1 MyAwesomeClothing\n      \ud83d\udcc4 myClothing.fbx\n```\n\nThese parameters should have this following syntax:\n```\n<m_MaleModel>MyAwesomeClothing/myClothing</m_MaleModel>\n```\n\nThe path separators can be either unix with `/` or `\\\\`, both are valid. Make sure to not add the extension.\n\n[m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in `media/lua/shared/NPCs/BodyLocations.lua` for the vanilla game).",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "m_MaleModel"
+          },
+          {
+            "#desc": "type_clothingItem/elements/m_MaleModel",
+            "description": "The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters **should** be left empty when the clothing item is a body texture.\n\nThe model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in `media/models_X` and accessed relative to it.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 models_X\n    \ud83d\udcc1 MyAwesomeClothing\n      \ud83d\udcc4 myClothing.fbx\n```\n\nThese parameters should have this following syntax:\n```\n<m_MaleModel>MyAwesomeClothing/myClothing</m_MaleModel>\n```\n\nThe path separators can be either unix with `/` or `\\\\`, both are valid. Make sure to not add the extension.\n\n[m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in `media/lua/shared/NPCs/BodyLocations.lua` for the vanilla game).",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "m_FemaleModel"
+          },
+          {
+            "#desc": "type_clothingItem/elements/m_MaleModel",
+            "description": "The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters **should** be left empty when the clothing item is a body texture.\n\nThe model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in `media/models_X` and accessed relative to it.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 models_X\n    \ud83d\udcc1 MyAwesomeClothing\n      \ud83d\udcc4 myClothing.fbx\n```\n\nThese parameters should have this following syntax:\n```\n<m_MaleModel>MyAwesomeClothing/myClothing</m_MaleModel>\n```\n\nThe path separators can be either unix with `/` or `\\\\`, both are valid. Make sure to not add the extension.\n\n[m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in `media/lua/shared/NPCs/BodyLocations.lua` for the vanilla game).",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_AltMaleModel"
+          },
+          {
+            "#desc": "type_clothingItem/elements/m_MaleModel",
+            "description": "The [m_MaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-malemodel) and [m_FemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-femalemodel) are used to specify what model file will be used for the clothing item. Those parameters **should** be left empty when the clothing item is a body texture.\n\nThe model file are accessed relatively to the parent folder of [media](https://pzwiki.net/wiki/Mod_structure#Media_folder) and relative to the models_X folder, but preferably should be stored in `media/models_X` and accessed relative to it.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 models_X\n    \ud83d\udcc1 MyAwesomeClothing\n      \ud83d\udcc4 myClothing.fbx\n```\n\nThese parameters should have this following syntax:\n```\n<m_MaleModel>MyAwesomeClothing/myClothing</m_MaleModel>\n```\n\nThe path separators can be either unix with `/` or `\\\\`, both are valid. Make sure to not add the extension.\n\n[m_AltMaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altmalemodel) and [m_AltFemaleModel](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-altfemalemodel) are used to define alternative models for clothing items that share the same [BodyLocation](https://pz-wiki-modding.github.io/PZ-API-Docs/scripts/item.html#bodylocation) slot as another clothing item. Alternative models relationship between BodyLocations are set in the Lua (in `media/lua/shared/NPCs/BodyLocations.lua` for the vanilla game).",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_AltFemaleModel"
+          },
+          {
+            "description": "The [GUID](https://pzwiki.net/wiki/GUID) of the clothing item. This needs to be the same as the one inside the [fileGuidTable](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/fileGuidTable.html#guid) file for the clothing item to be recognized by the game.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "m_GUID"
+          },
+          {
+            "description": "If `true`, the clothing item won't deform with the character's body. This is used for items like backpacks or hats that should not change shape with the character's body.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:boolean"
+            },
+            "name": "m_Static"
+          },
+          {
+            "description": "When `m_AllowRandomHue` is set to `true`, the clothing item will have a random hue applied to it. This will only affect colored areas of the clothing item. This is different than [m_AllowRandomTint](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomtint) which applies a random color on white areas.\n\n[m_AllowRandomTint](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomtint) needs to be turned off.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:boolean"
+            },
+            "name": "m_AllowRandomHue"
+          },
+          {
+            "description": "When `m_AllowRandomTint` is set to `true`, the clothing item will have a random tint applied to it. This mostly affects white areas of the clothing item. Colored areas will become darker or shift to a brownish color.\n\n[m_AllowRandomHue](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-allowrandomhue) needs to be turned off.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:boolean"
+            },
+            "name": "m_AllowRandomTint"
+          },
+          {
+            "description": "Specifies a bone to attach the clothing item to. Mostly notably used for hats and some arm protection items. To attach to the head, use `Bip01_Head`.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "m_AttachBone"
+          },
+          {
+            "description": "Specifies a shader to use for the clothing item. The default shader used by clothing items is `basicEffect`. The value needs to be the filename of the shader inside the folder `media/shaders`.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "m_Shader"
+          },
+          {
+            "description": "[textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices) sets the texture used by the clothing item. Many of those can be provided as random choices for the clothing item. The textures need to be stored in the folder `media/textures`.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 textures\n    \ud83d\udcc1 CoolMod\n      \ud83d\udcc4 texture1.png\n      \ud83d\udcc4 texture2.png\n```\n\nYou'd have:\n```xml\n<textureChoices>CoolMod/texture1</textureChoices>\n<textureChoices>CoolMod/texture2</textureChoices>\n```\n\n[m_BaseTextures](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-basetextures) is used specifically for 2D clothing items that are applied on the character's body directly (tshirts, pants, socks...). The folder structure is the same as for [textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices).",
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "textureChoices"
+          },
+          {
+            "#desc": "type_clothingItem/elements/textureChoices",
+            "description": "[textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices) sets the texture used by the clothing item. Many of those can be provided as random choices for the clothing item. The textures need to be stored in the folder `media/textures`.\n\nFor example, for the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 textures\n    \ud83d\udcc1 CoolMod\n      \ud83d\udcc4 texture1.png\n      \ud83d\udcc4 texture2.png\n```\n\nYou'd have:\n```xml\n<textureChoices>CoolMod/texture1</textureChoices>\n<textureChoices>CoolMod/texture2</textureChoices>\n```\n\n[m_BaseTextures](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-basetextures) is used specifically for 2D clothing items that are applied on the character's body directly (tshirts, pants, socks...). The folder structure is the same as for [textureChoices](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#texturechoices).",
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_BaseTextures"
+          },
+          {
+            "description": "[m_Masks](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-masks) when set to a specific integer value will hide specific elements of the character's body model. This is notably used to remove clipping with body parts that are hidden by the clothing item. For example, a jacket will hide the torso and arms, so to reduce risks of clipping you may want to hide these.\n\nYou can find a list of the values and their corresponding body parts in the Project Zomboid Modding Archives [here](https://github.com/PZ-Wiki-Modding/Archive.Project-Zomboid-Modding/blob/main/Clothing/Masks/Mask.png).\n\nYou can insert as many of these as you want, for example:\n```xml\n<m_Masks>12</m_Masks>\n<m_Masks>13</m_Masks>\n<m_Masks>14</m_Masks>\n<m_Masks>3</m_Masks>\n<m_Masks>5</m_Masks>\n```\n\n[m_UnderlayMasksFolder](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-underlaymasksfolder) supposedly is used to add a texture folder in which you have modified versions of these masks if you ever need to adjust the masks for your own clothing items without clashing with other mods custom masks.",
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "xs:integer"
+            },
+            "name": "m_Masks"
+          },
+          {
+            "description": "Default value is `media/textures/Body/Masks`. Some clothing behaviors seem to be hardcoded to this path. You can notably use it to deactivate masks by setting the value to `media/textures/Clothes/Hat/Masks`, but it will also deactivate damage (holes) and blood effects.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "m_MasksFolder"
+          },
+          {
+            "description": "Default value is `media/textures/Body/UnderlayMasks`. Some clothing behaviors seem to be hardcoded to this path.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "m_UnderlayMasksFolder"
+          },
+          {
+            "description": "Seems to be used to specify if a hat will hide the hair and beard. Notable values are:\n- `default`\n- `nohairnobeard`\n- `nobeard`\n- `nohair`\n\nThen values `Group` followed by a number `01`, `02`, etc are also used.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "m_HatCategory"
+          },
+          {
+            "description": "Link to other items that this clothingItem should spawn with. This is for example used to make left and right elbow pads spawn together. The value needs to be the [GUID](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) of the other clothing item.\n\nTo add multiple items, you can add multiple `<m_SpawnWith>` elements:\n```xml\n<m_SpawnWith>GUID1</m_SpawnWith>\n<m_SpawnWith>GUID2</m_SpawnWith>\n<m_SpawnWith>GUID3</m_SpawnWith>\n...\n```",
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_SpawnWith"
+          },
+          {
+            "description": "Refers to the [name](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html#name) parameter of a decal group defined in the [clothingDecals.xml](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingDecals.html) file. The clothing decals are used to add additional textures on top of the clothing item. This is most notably used to add logos on t-shirts, and it is possible to add multiple logos on a single decal group.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 0,
+              "type": "xs:string"
+            },
+            "name": "m_DecalGroup"
+          }
+        ],
+        "type": "complex"
+      }
+    }
+  },
+  "fileGuidTable": {
+    "description": "Associate [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) files to a GUID for access in the [clothing](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothing.html) file. Whenever you want to use vanilla clothing in your clothing.xml file, you have to redefine them in your own mod's fileGuidTable.xml file, otherwise the game will not recognize them.\n\nAn example file would look like this:\n```xml\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<fileGuidTable>\n  <files>\n    <path>media/clothing/clothingItems/MyClothingItem.xml</path>\n    <guid>YOUR_RANDOM_CLOTHING_ITEM_GUID_HERE</guid>\n  </files>\n  <files>\n    <path>media/clothing/clothingItems/MyOtherClothingItem.xml</path>\n    <guid>YOUR_OTHER_RANDOM_CLOTHING_ITEM_GUID_HERE</guid>\n  </files>\n</fileGuidTable>\n```\n\nDue to all the GUID work between the clothing.xml, fileGuidTable.xml and clothingItem.xml files, it can be easy to get lost. [Outfit XML Convereter](https://pzwiki.net/wiki/Outfit_XML_Converter) can help you with the process.",
+    "patterns": [
+      "**/media/fileGuidTable.xml"
+    ],
+    "root": {
+      "name": "fileGuidTable",
+      "type": "type_fileGuidTable"
+    },
+    "types": {
+      "type_fileGuidTable": {
+        "composition": "choice",
+        "elements": [
+          {
+            "description": "Define a [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) file and GUID association.\n\nFor example for a clothingItem with the following file structure:\n```\n\ud83d\udcc1 media\n  \ud83d\udcc1 clothing\n    \ud83d\udcc1 clothingItems\n      \ud83d\udcc4 MyClothingItem.xml\n```\n\nYou should have the following parameters:\n```xml\n<files>\n  <path>media/clothing/clothingItems/MyClothingItem.xml</path>\n  <guid>YOUR_RANDOM_CLOTHING_ITEM_GUID_HERE</guid>\n</files>\n```",
+            "metadata": {
+              "maxOccurs": "unbounded",
+              "minOccurs": 0,
+              "type": "type_fileGuidTable_files"
+            },
+            "name": "files"
+          }
+        ],
+        "type": "complex"
+      },
+      "type_fileGuidTable_files": {
+        "composition": "sequence",
+        "elements": [
+          {
+            "description": "The path to the [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) file. This path is relative to the upper folder of `media`, for example for the following structure:\n```\n\ud83d\udcc1 MyMod\n  \ud83d\udcc1 media\n    \ud83d\udcc1 clothing\n      \ud83d\udcc1 clothingItems\n        \ud83d\udcc4 MyClothingItem.xml\n```\n\nYou need the following parameter:\n```xml\n<path>media/clothing/clothingItems/MyClothingItem.xml</path>\n```",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "path"
+          },
+          {
+            "description": "The [GUID](https://pzwiki.net/wiki/GUID) of the clothing item. This needs to be the same as the one inside the [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) file for the clothing item to be recognized by the game.",
+            "metadata": {
+              "maxOccurs": 1,
+              "minOccurs": 1,
+              "type": "xs:string"
+            },
+            "name": "guid"
+          }
+        ],
+        "type": "complex"
       }
     }
   }

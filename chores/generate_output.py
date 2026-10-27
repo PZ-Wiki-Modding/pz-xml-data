@@ -67,5 +67,5 @@ for yaml_file in DATA_DIR.rglob("*.yaml"):
 
 OUT_FILE.parent.mkdir(parents=True, exist_ok=True)
 with open(OUT_FILE, 'w') as f:
-    json.dump(out, f, indent=2)
+    json.dump(out, f, indent=2, sort_keys=True)
 

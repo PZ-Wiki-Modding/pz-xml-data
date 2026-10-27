@@ -9,7 +9,7 @@
   </xs:element>
   <xs:complexType name="type_fileGuidTable">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="files" type="type_fileGuidTable_files" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="files" maxOccurs="unbounded" minOccurs="0" type="type_fileGuidTable_files">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>Define a [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) file and GUID association.</p><p>For example for a clothingItem with the following file structure:</p><pre><code>📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 clothing</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 clothingItems</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 MyClothingItem.xml</code></pre><p>You should have the following parameters:
@@ -26,7 +26,7 @@
   </xs:complexType>
   <xs:complexType name="type_fileGuidTable_files">
     <xs:all>
-      <xs:element name="path" type="xs:string" minOccurs="1" maxOccurs="1">
+      <xs:element name="path" maxOccurs="1" minOccurs="1" type="xs:string">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The path to the [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html) file. This path is relative to the upper folder of <code>media</code>, for example for the following structure:</p><pre><code>📁 MyMod</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 clothing</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 clothingItems</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 MyClothingItem.xml</code></pre><p>You need the following parameter:
@@ -36,7 +36,7 @@
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="guid" type="xs:string" minOccurs="1" maxOccurs="1">
+      <xs:element name="guid" maxOccurs="1" minOccurs="1" type="xs:string">
         <xs:annotation>
           <xs:documentation><![CDATA[
         <p>The [GUID](https://pzwiki.net/wiki/GUID) of the clothing item. This needs to be the same as the one inside the [clothingItem](https://pz-wiki-modding.github.io/PZ-API-Docs/xml/clothingItem.html#m-guid) file for the clothing item to be recognized by the game.</p>

@@ -58,7 +58,7 @@
       <xs:element name="m_Name" maxOccurs="1" minOccurs="1" type="xs:string">
         <xs:annotation>
           <xs:documentation><![CDATA[
-        <p>A unique identifier for this animation node. For example: &quot;LoadRiffle&quot;, &quot;Walk&quot; etc. This is notably used to reference this animNode in other animNodes.</p>
+        <p>A unique identifier for this animation node. For example: "LoadRiffle", "Walk" etc. This is notably used to reference this animNode in other animNodes.</p>
         ]]></xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -177,7 +177,7 @@
         <xs:documentation><![CDATA[
         <p>Import relative animNode files into this one which are stored in the same directory. This is only possible for files located in the actual same folder, so only per mod anim node files.</p><p>Needs to be the file name so for the following example folder structure:</p><pre><code>📁 media</code></pre><pre><code>&amp;nbsp;&amp;nbsp;📁 AnimSets</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📁 Rifle</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 LoadRifle.xml</code></pre><pre><code>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;📄 LoadRifle_Alt.xml</code></pre><p>The LoadRifle_Alt.xml file can import the LoadRifle.xml file by using:
 ``<code>xml
-&amp;lt;animNode x_extends=&quot;LoadRifle.xml&quot;&amp;gt;&amp;lt;/animNode&amp;gt;</p><pre><code></code></pre><pre><code>Now take two separate mods:</code></pre><p>📁 Mod1
+&amp;lt;animNode x_extends="LoadRifle.xml"&amp;gt;&amp;lt;/animNode&amp;gt;</p><pre><code></code></pre><pre><code>Now take two separate mods:</code></pre><p>📁 Mod1
   📁 media
     📁 AnimSets
       📁 Rifle
